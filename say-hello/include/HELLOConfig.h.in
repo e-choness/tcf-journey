@@ -1,2 +1,0 @@
-#define HelloLibrary_VERSION_MAJOR @HelloLibrary_VERSION_MAJOR@
-#define HelloLibrary_VERSION_MINOR @HelloLibrary_VERSION_MINOR@
