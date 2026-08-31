@@ -1,0 +1,13 @@
+{%- comment -%}
+  Usage:  {% include t.html k="home.cta_tcf" %}
+  Emits:  <span data-i18n-en="Open the drill library"
+                data-i18n-fr="Ouvrir les exercices">Open the drill library</span>
+{%- endcomment -%}
+{%- assign parts = include.k | split: "." -%}
+{%- assign en = site.data.i18n.en -%}
+{%- assign fr = site.data.i18n.fr -%}
+{%- for p in parts -%}
+  {%- assign en = en[p] -%}
+  {%- assign fr = fr[p] -%}
+{%- endfor -%}
+<span data-i18n-en="{{ en | escape }}" data-i18n-fr="{{ fr | escape }}">{{ en }}</span>

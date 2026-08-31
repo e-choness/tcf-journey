@@ -4,7 +4,8 @@ layout: default
 
 <article class="drill-page">
   <div class="drill-container">
-    <a href="{{ '/tcf' | relative_url }}" class="back-link">← Back to drills</a>
+    <a href="{{ '/tcf' | relative_url }}" class="back-link"
+       data-i18n-en="{{ site.data.i18n.en.drill.back }}" data-i18n-fr="{{ site.data.i18n.fr.drill.back }}">← {{ site.data.i18n.en.drill.back }}</a>
 
     <div class="drill-header">
       <div class="drill-tags-row">
@@ -37,11 +38,14 @@ layout: default
     </div>
 
     <div class="drill-footer">
-      <button class="drill-done-btn-large" data-drill-id="{{ page.url | relative_url }}" id="drill-done-btn">
-        <span class="done-text">Mark as done</span>
-        <span class="done-check">✓ Done</span>
+      <button class="drill-done-btn-large" data-drill-id="{{ page.url | relative_url }}" id="drill-done-btn" aria-pressed="false"
+              data-i18n-en="{{ site.data.i18n.en.drill.mark_done }}" data-i18n-fr="{{ site.data.i18n.fr.drill.mark_done }}"
+              data-i18n-marked-en="{{ site.data.i18n.en.drill.marked_done }}" data-i18n-marked-fr="{{ site.data.i18n.fr.drill.marked_done }}">
+        <span class="done-text">{{ site.data.i18n.en.drill.mark_done }}</span>
+        <span class="done-check">✓ {{ site.data.i18n.en.drill.marked_done }}</span>
       </button>
-      <button class="drill-next-btn" id="next-drill-btn">Next drill →</button>
+      <button class="drill-next-btn" id="next-drill-btn"
+              data-i18n-en="{{ site.data.i18n.en.drill.next }}" data-i18n-fr="{{ site.data.i18n.fr.drill.next }}">{{ site.data.i18n.en.drill.next }} →</button>
     </div>
   </div>
 </article>

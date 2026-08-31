@@ -1,32 +1,65 @@
 <div class="french-header">
   <div class="french-intro">
-    <div class="kicker">Flip cards</div>
-    <h1>French, front and back</h1>
-    <p>Front is the French term. Back is the meaning, the gender and a sentence I actually heard somewhere.</p>
+    <div class="kicker" data-i18n-en="{{ site.data.i18n.en.french.kicker }}" data-i18n-fr="{{ site.data.i18n.fr.french.kicker }}">{{ site.data.i18n.en.french.kicker }}</div>
+    <h1 data-i18n-en="{{ site.data.i18n.en.french.title }}" data-i18n-fr="{{ site.data.i18n.fr.french.title }}">{{ site.data.i18n.en.french.title }}</h1>
+    <p data-i18n-en="{{ site.data.i18n.en.french.body }}" data-i18n-fr="{{ site.data.i18n.fr.french.body }}">{{ site.data.i18n.en.french.body }}</p>
   </div>
 </div>
 
 <div class="french-filters">
-  <button class="tag" data-category="">All</button>
-  <button class="tag" data-category="grammar">Grammar</button>
-  <button class="tag" data-category="vocabulary">Vocabulary</button>
-  <button class="tag" data-category="conjugation">Conjugation</button>
-  <button class="tag" data-category="expression">Expression</button>
+  <div class="filter-group">
+    <span class="filter-label"
+          data-i18n-en="{{ site.data.i18n.en.french.all }}" data-i18n-fr="{{ site.data.i18n.fr.french.all }}">Category</span>
+    <div class="filter-tags" data-filter="category">
+      <button class="tag active" data-category=""
+              data-i18n-en="{{ site.data.i18n.en.french.all }}"
+              data-i18n-fr="{{ site.data.i18n.fr.french.all }}">{{ site.data.i18n.en.french.all }}</button>
+      {% for c in site.data.french.categories %}
+      <button class="tag" data-category="{{ c.id }}"
+              data-i18n-en="{{ c.en }}" data-i18n-fr="{{ c.fr }}">{{ c.en }}</button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Level</span>
+    <div class="filter-tags" data-filter="level">
+      <button class="tag active" data-level=""
+              data-i18n-en="{{ site.data.i18n.en.french.all }}"
+              data-i18n-fr="{{ site.data.i18n.fr.french.all }}">{{ site.data.i18n.en.french.all }}</button>
+      {% for l in site.data.french.levels %}
+      <button class="tag" data-level="{{ l }}">{{ l }}</button>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
-<div class="french-hint hand">
-  Click a card to flip · drag it to throw it around
-  <button id="reset-cards" class="reset-btn" aria-label="Reset cards">↻</button>
+<div class="french-hint hand"
+     data-i18n-en="{{ site.data.i18n.en.french.hint }}" data-i18n-fr="{{ site.data.i18n.fr.french.hint }}">
+  {{ site.data.i18n.en.french.hint }}
+  <button id="reset-cards" class="reset-btn" aria-label="Reset cards"
+          data-i18n-aria-en="{{ site.data.i18n.en.french.reset }}"
+          data-i18n-aria-fr="{{ site.data.i18n.fr.french.reset }}">↻</button>
 </div>
 
 <div class="cards-grid" id="cards-grid">
   {% for card in site.french %}
-  <div class="flip-card" data-category="{{ card.category }}">
+  {%- assign cat = site.data.french.categories | where: "id", card.category | first -%}
+  <button class="flip-card" data-category="{{ card.category }}" data-level="{{ card.level }}" aria-pressed="false"
+          data-i18n-aria-en="{{ site.data.i18n.en.french.flip }}" data-i18n-aria-fr="{{ site.data.i18n.fr.french.flip }}">
     <div class="card-inner">
       <div class="card-front">
-        <div class="card-category">{{ card.category | capitalize }}</div>
+        <div class="card-mark" aria-hidden="true">{{ card.term | remove_first: "le " | remove_first: "la " | remove_first: "l'" | slice: 0 | upcase }}</div>
+        <div class="card-category"
+             data-i18n-en="{{ cat.en }}" data-i18n-fr="{{ cat.fr }}">{{ cat.en }}</div>
         <div class="card-term">{{ card.term }}</div>
         <div class="card-hint">{{ card.hint }}</div>
+        <div class="card-foot">
+          <span>{{ card.level }}</span>
+          <span class="flip-hint hand"
+                data-i18n-en="{{ site.data.i18n.en.french.flip }}"
+                data-i18n-fr="{{ site.data.i18n.fr.french.flip }}">{{ site.data.i18n.en.french.flip }}</span>
+        </div>
       </div>
       <div class="card-back">
         <div class="card-gender">{{ card.gender }}</div>
@@ -35,6 +68,6 @@
         <div class="card-example-en">{{ card.example_en }}</div>
       </div>
     </div>
-  </div>
+  </button>
   {% endfor %}
 </div>

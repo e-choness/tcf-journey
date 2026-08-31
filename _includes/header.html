@@ -6,11 +6,16 @@
         </a>
 
         <nav class="site-nav d-only">
-            <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-            <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}>TCF</a>
-            <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}>French</a>
-            <a href="{{ '/blog' | relative_url }}" {% if page.url contains '/blog' %}class="active"{% endif %}>Blog</a>
-            <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
+            <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}
+               data-i18n-en="{{ site.data.i18n.en.nav.home }}" data-i18n-fr="{{ site.data.i18n.fr.nav.home }}">{{ site.data.i18n.en.nav.home }}</a>
+            <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}
+               data-i18n-en="{{ site.data.i18n.en.nav.tcf }}" data-i18n-fr="{{ site.data.i18n.fr.nav.tcf }}">{{ site.data.i18n.en.nav.tcf }}</a>
+            <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}
+               data-i18n-en="{{ site.data.i18n.en.nav.french }}" data-i18n-fr="{{ site.data.i18n.fr.nav.french }}">{{ site.data.i18n.en.nav.french }}</a>
+            <a href="{{ '/blog' | relative_url }}" {% if page.url contains '/blog' %}class="active"{% endif %}
+               data-i18n-en="{{ site.data.i18n.en.nav.blog }}" data-i18n-fr="{{ site.data.i18n.fr.nav.blog }}">{{ site.data.i18n.en.nav.blog }}</a>
+            <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}
+               data-i18n-en="{{ site.data.i18n.en.nav.about }}" data-i18n-fr="{{ site.data.i18n.fr.nav.about }}">{{ site.data.i18n.en.nav.about }}</a>
         </nav>
 
         <div class="header-controls">
@@ -24,10 +29,23 @@
     </div>
 
     <div class="mobile-nav" id="mobile-nav">
-        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}>TCF</a>
-        <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}>French</a>
-        <a href="{{ '/blog' | relative_url }}" {% if page.url contains '/blog' %}class="active"{% endif %}>Blog</a>
-        <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
+        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}
+           data-i18n-en="{{ site.data.i18n.en.nav.home }}" data-i18n-fr="{{ site.data.i18n.fr.nav.home }}">
+            <span class="mobile-nav-num">01</span>{{ site.data.i18n.en.nav.home }}</a>
+        <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}
+           data-i18n-en="{{ site.data.i18n.en.nav.tcf }}" data-i18n-fr="{{ site.data.i18n.fr.nav.tcf }}">
+            <span class="mobile-nav-num">02</span>{{ site.data.i18n.en.nav.tcf }}</a>
+        <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}
+           data-i18n-en="{{ site.data.i18n.en.nav.french }}" data-i18n-fr="{{ site.data.i18n.fr.nav.french }}">
+            <span class="mobile-nav-num">03</span>{{ site.data.i18n.en.nav.french }}</a>
+        <a href="{{ '/blog' | relative_url }}" {% if page.url contains '/blog' %}class="active"{% endif %}
+           data-i18n-en="{{ site.data.i18n.en.nav.blog }}" data-i18n-fr="{{ site.data.i18n.fr.nav.blog }}">
+            <span class="mobile-nav-num">04</span>{{ site.data.i18n.en.nav.blog }}</a>
+        <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}
+           data-i18n-en="{{ site.data.i18n.en.nav.about }}" data-i18n-fr="{{ site.data.i18n.fr.nav.about }}">
+            <span class="mobile-nav-num">05</span>{{ site.data.i18n.en.nav.about }}</a>
+        <div class="mobile-nav-foot">
+            <span data-i18n-en="{{ site.data.i18n.en.footer }}" data-i18n-fr="{{ site.data.i18n.fr.footer }}">{{ site.data.i18n.en.footer }}</span>
+        </div>
     </div>
 </header>

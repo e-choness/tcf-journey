@@ -10,10 +10,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Patrick+Hand&display=swap">
 
+    <script>
+    (function () {
+      try {
+        var l = localStorage.getItem('tcf-journey-lang');
+        if (l !== 'en' && l !== 'fr') l = (navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en';
+        var t = localStorage.getItem('tcf-journey-theme') || 'dark';
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('lang', l);
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+    </script>
+
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
 </head>
-<body data-theme="dark">
+<body>
     <div class="paper">
         <!-- Cursor spotlight -->
         <div id="spotlight"></div>
@@ -35,6 +48,7 @@
     </div>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/progress.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/navbar.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/tcf-drills.js' | relative_url }}"></script>

@@ -1,39 +1,39 @@
 <section class="hero-section">
     <div class="hero-left">
-        <div class="hero-kicker hand">Learning in public · target C1</div>
-        <h1 class="hero-h1">Working through the TCF, <span class="underline-scribble">one drill</span> at a time.</h1>
-        <p class="hero-body">A personal workbook: drills grouped by tâche, flip cards for the words that keep slipping, and notes on what actually moved the score.</p>
+        <div class="hero-kicker hand"
+             data-i18n-en="{{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.about.target }}"
+             data-i18n-fr="{{ site.data.i18n.fr.home.kicker | replace: '%TARGET%', site.data.about.target }}">
+            {{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.about.target }}</div>
+        <h1 class="hero-h1">
+            <span data-i18n-en="{{ site.data.i18n.en.home.title_a }}" data-i18n-fr="{{ site.data.i18n.fr.home.title_a }}">{{ site.data.i18n.en.home.title_a }}</span>
+            <span class="underline-scribble"
+                  data-i18n-en="{{ site.data.i18n.en.home.title_em }}" data-i18n-fr="{{ site.data.i18n.fr.home.title_em }}">{{ site.data.i18n.en.home.title_em }}</span>
+            <span data-i18n-en="{{ site.data.i18n.en.home.title_b }}" data-i18n-fr="{{ site.data.i18n.fr.home.title_b }}">{{ site.data.i18n.en.home.title_b }}</span>
+        </h1>
+        <p class="hero-body"
+           data-i18n-en="{{ site.data.i18n.en.home.body }}" data-i18n-fr="{{ site.data.i18n.fr.home.body }}">{{ site.data.i18n.en.home.body }}</p>
         <div class="hero-buttons">
-            <a href="{{ '/tcf' | relative_url }}" class="btn btn-primary pop">Open the drill library</a>
-            <a href="{{ '/french' | relative_url }}" class="btn btn-secondary pop">Flip some cards</a>
+            <a href="{{ '/tcf' | relative_url }}" class="btn btn-primary pop"
+               data-i18n-en="{{ site.data.i18n.en.home.cta_tcf }}" data-i18n-fr="{{ site.data.i18n.fr.home.cta_tcf }}">{{ site.data.i18n.en.home.cta_tcf }}</a>
+            <a href="{{ '/french' | relative_url }}" class="btn btn-secondary pop"
+               data-i18n-en="{{ site.data.i18n.en.home.cta_french }}" data-i18n-fr="{{ site.data.i18n.fr.home.cta_french }}">{{ site.data.i18n.en.home.cta_french }}</a>
         </div>
     </div>
     <div class="hero-right">
         <div class="cube-wrapper" data-cube>
             <div data-cube-inner>
-                <div class="cube-face" data-cube-face="0">
-                    <span class="cube-code">CO</span>
-                    <span class="cube-count" id="cube-co-count">0/3</span>
-                    <span class="cube-label">Listening</span>
+                {% for s in site.data.tcf.sections %}
+                {%- assign total = site.tcf | where: "section", s.id | size -%}
+                <div class="cube-face" data-cube-face="{{ forloop.index0 | times: 90 }}">
+                    <span class="cube-code">{{ s.code }}</span>
+                    <span class="cube-count" id="cube-{{ s.id }}-count">0 / {{ total }}</span>
+                    <span class="cube-label" data-i18n-en="{{ s.en }}" data-i18n-fr="{{ s.fr }}">{{ s.en }}</span>
                 </div>
-                <div class="cube-face" data-cube-face="90">
-                    <span class="cube-code">CE</span>
-                    <span class="cube-count" id="cube-ce-count">0/0</span>
-                    <span class="cube-label">Reading</span>
-                </div>
-                <div class="cube-face" data-cube-face="180">
-                    <span class="cube-code">EO</span>
-                    <span class="cube-count" id="cube-eo-count">0/0</span>
-                    <span class="cube-label">Speaking</span>
-                </div>
-                <div class="cube-face" data-cube-face="270">
-                    <span class="cube-code">EE</span>
-                    <span class="cube-count" id="cube-ee-count">0/0</span>
-                    <span class="cube-label">Writing</span>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="cube-hint hand">drag to spin →</div>
+        <div class="cube-hint hand"
+             data-i18n-en="{{ site.data.i18n.en.home.drag_hint }}" data-i18n-fr="{{ site.data.i18n.fr.home.drag_hint }}">{{ site.data.i18n.en.home.drag_hint }}</div>
     </div>
 </section>
 
@@ -42,20 +42,24 @@
     <div class="tape"></div>
     <div class="stats-grid">
         <div class="stat" data-reveal>
-            <div class="stat-value" id="days-left" data-exam-date="{% if site.data.about.exam_date != 'TBD' %}{{ site.data.about.exam_date }}{% endif %}">76</div>
-            <div class="stat-label">Days to exam</div>
+            <div class="stat-value" id="days-left" data-exam-date="{% if site.data.about.exam_date != 'TBD' %}{{ site.data.about.exam_date }}{% endif %}">—</div>
+            <div class="stat-label"
+                 data-i18n-en="{{ site.data.i18n.en.home.stat_days }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_days }}">{{ site.data.i18n.en.home.stat_days }}</div>
         </div>
         <div class="stat" data-reveal>
             <div class="stat-value" id="drills-done">0</div>
-            <div class="stat-label">Drills done</div>
+            <div class="stat-label"
+                 data-i18n-en="{{ site.data.i18n.en.home.stat_drills }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_drills }}">{{ site.data.i18n.en.home.stat_drills }}</div>
         </div>
         <div class="stat" data-reveal>
-            <div class="stat-value">10</div>
-            <div class="stat-label">Cards</div>
+            <div class="stat-value">{{ site.french | size }}</div>
+            <div class="stat-label"
+                 data-i18n-en="{{ site.data.i18n.en.home.stat_cards }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_cards }}">{{ site.data.i18n.en.home.stat_cards }}</div>
         </div>
         <div class="stat" data-reveal>
-            <div class="stat-value">182</div>
-            <div class="stat-label">Study hours</div>
+            <div class="stat-value">{{ site.data.about.study_hours | default: "—" }}</div>
+            <div class="stat-label"
+                 data-i18n-en="{{ site.data.i18n.en.home.stat_hours }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_hours }}">{{ site.data.i18n.en.home.stat_hours }}</div>
         </div>
     </div>
 </section>
@@ -64,30 +68,36 @@
     <div class="tiles-grid">
         <div class="tile" data-reveal>
             <div class="tile-content">
-                <div class="tile-kicker">Drill library</div>
-                <h2>Drills by tâche</h2>
-                <p>Tick them off as you go. Progress is per tâche, and it's remembered between visits.</p>
-                <a href="{{ '/tcf' | relative_url }}" class="btn btn-ghost">Open the tracker →</a>
+                <div class="tile-kicker"
+                     data-i18n-en="{{ site.data.i18n.en.home.tile_tcf_kicker }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_tcf_kicker }}">{{ site.data.i18n.en.home.tile_tcf_kicker }}</div>
+                <h2 data-i18n-en="{{ site.data.i18n.en.home.tile_tcf_title }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_tcf_title }}">{{ site.data.i18n.en.home.tile_tcf_title }}</h2>
+                <p data-i18n-en="{{ site.data.i18n.en.home.tile_tcf_body }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_tcf_body }}">{{ site.data.i18n.en.home.tile_tcf_body }}</p>
+                <a href="{{ '/tcf' | relative_url }}" class="btn btn-ghost"
+                   data-i18n-en="{{ site.data.i18n.en.home.tile_tcf_cta }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_tcf_cta }}">{{ site.data.i18n.en.home.tile_tcf_cta }}</a>
             </div>
             <div class="tile-visual pop wob">TCF</div>
         </div>
 
         <div class="tile" data-reveal>
             <div class="tile-content">
-                <div class="tile-kicker">Flip cards</div>
-                <h2>French, front and back</h2>
-                <p>Front is the French term. Back is the meaning, the gender and a sentence I actually heard somewhere.</p>
-                <a href="{{ '/french' | relative_url }}" class="btn btn-ghost">Flip some cards →</a>
+                <div class="tile-kicker"
+                     data-i18n-en="{{ site.data.i18n.en.home.tile_fr_kicker }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_fr_kicker }}">{{ site.data.i18n.en.home.tile_fr_kicker }}</div>
+                <h2 data-i18n-en="{{ site.data.i18n.en.home.tile_fr_title }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_fr_title }}">{{ site.data.i18n.en.home.tile_fr_title }}</h2>
+                <p data-i18n-en="{{ site.data.i18n.en.home.tile_fr_body }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_fr_body }}">{{ site.data.i18n.en.home.tile_fr_body }}</p>
+                <a href="{{ '/french' | relative_url }}" class="btn btn-ghost"
+                   data-i18n-en="{{ site.data.i18n.en.home.tile_fr_cta }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_fr_cta }}">{{ site.data.i18n.en.home.tile_fr_cta }}</a>
             </div>
             <div class="tile-visual pop wob2">FR</div>
         </div>
 
         <div class="tile" data-reveal>
             <div class="tile-content">
-                <div class="tile-kicker">Journal</div>
-                <h2>Learning journey</h2>
-                <p>Longer posts: routines, mock-exam post-mortems, and the occasional detour.</p>
-                <a href="{{ '/blog' | relative_url }}" class="btn btn-ghost">Read the journal →</a>
+                <div class="tile-kicker"
+                     data-i18n-en="{{ site.data.i18n.en.home.tile_log_kicker }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_log_kicker }}">{{ site.data.i18n.en.home.tile_log_kicker }}</div>
+                <h2 data-i18n-en="{{ site.data.i18n.en.home.tile_log_title }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_log_title }}">{{ site.data.i18n.en.home.tile_log_title }}</h2>
+                <p data-i18n-en="{{ site.data.i18n.en.home.tile_log_body }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_log_body }}">{{ site.data.i18n.en.home.tile_log_body }}</p>
+                <a href="{{ '/blog' | relative_url }}" class="btn btn-ghost"
+                   data-i18n-en="{{ site.data.i18n.en.home.tile_log_cta }}" data-i18n-fr="{{ site.data.i18n.fr.home.tile_log_cta }}">{{ site.data.i18n.en.home.tile_log_cta }}</a>
             </div>
             <div class="tile-visual pop wob">LOG</div>
         </div>

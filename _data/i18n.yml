@@ -2,21 +2,146 @@
 # Default language: browser locale, then remembered in localStorage.
 en:
   nav: { home: Home, tcf: TCF, french: French, blog: Blog, about: About }
-  search_placeholder: "Search drills, topics, tâches…"
-  clear: Reset
-  no_results: "No drill matches those filters."
-  mark_done: "Mark as done"
-  marked_done: "Done"
-  next_drill: "Next drill"
-  card_hint: "Click a card to flip · drag it to throw it around"
-  prompt: "The prompt"
+
+  home:
+    kicker: "Learning in public · target %TARGET%"
+    title_a: "Working through the TCF,"
+    title_em: "one drill"
+    title_b: "at a time."
+    body: "A personal workbook: drills grouped by tâche, flip cards for the words that keep slipping, and notes on what actually moved the score."
+    cta_tcf: "Open the drill library"
+    cta_french: "Flip some cards"
+    drag_hint: "drag to spin →"
+    stat_days: "Days to exam"
+    stat_drills: "Drills done"
+    stat_cards: "Cards"
+    stat_hours: "Study hours"
+    tile_tcf_kicker: "Drill library"
+    tile_tcf_title: "Drills by tâche"
+    tile_tcf_body: "Tick them off as you go. Progress is per tâche, and it's remembered between visits."
+    tile_tcf_cta: "Open the tracker →"
+    tile_fr_kicker: "Flip cards"
+    tile_fr_title: "French, front and back"
+    tile_fr_body: "Front is the French term. Back is the meaning, the gender and a sentence I actually heard somewhere."
+    tile_fr_cta: "Flip some cards →"
+    tile_log_kicker: "Journal"
+    tile_log_title: "Learning journey"
+    tile_log_body: "Longer posts: routines, mock-exam post-mortems, and the occasional detour."
+    tile_log_cta: "Read the journal →"
+
+  tcf:
+    kicker: "Drill library"
+    title: "Drills by tâche"
+    body: "Tick them off as you go. Progress is per tâche, and it's remembered between visits."
+    search_placeholder: "Search drills, topics, tâches…"
+    clear: Reset
+    all: All
+    no_results: "No drill matches those filters."
+    done_suffix: done
+    badge_suffix: "done!"
+
+  french:
+    kicker: "Flip cards"
+    title: "French, front and back"
+    body: "Front is the French term. Back is the meaning, the gender and a sentence I actually heard somewhere."
+    hint: "Click a card to flip · drag it to throw it around"
+    flip: "flip ↻"
+    all: All
+    reset: "Reset cards"
+
+  blog:
+    kicker: Journal
+    title: "Learning journey"
+    body: "Longer posts: routines, mock-exam post-mortems, and the occasional detour."
+    next: "Next post"
+
+  drill:
+    prompt: "The prompt"
+    mark_done: "Mark as done"
+    marked_done: "Done"
+    next: "Next drill"
+    back: "Drills by tâche"
+
+  about:
+    kicker: About
+    title: "About this site"
+    row_goal: Goal
+    row_exam: Exam
+    row_langs: Languages
+    row_site: Site
+    langs_value: "EN / FR interface · content untranslated"
+
+  footer: "Jekyll · Nocturne theme · built for one stubborn learner"
+
 fr:
   nav: { home: Accueil, tcf: TCF, french: Français, blog: Blog, about: "À propos" }
-  search_placeholder: "Chercher un exercice, un thème, une tâche…"
-  clear: Réinitialiser
-  no_results: "Aucun exercice pour ces filtres."
-  mark_done: "Marquer comme fait"
-  marked_done: "Fait"
-  next_drill: "Exercice suivant"
-  card_hint: "Cliquez pour retourner · faites glisser pour la lancer"
-  prompt: "La consigne"
+
+  home:
+    kicker: "Apprendre en public · objectif %TARGET%"
+    title_a: "Travailler le TCF,"
+    title_em: "un exercice"
+    title_b: "à la fois."
+    body: "Un carnet personnel : des exercices classés par tâche, des fiches à retourner pour les mots qui glissent, et des notes sur ce qui a vraiment fait bouger le score."
+    cta_tcf: "Ouvrir les exercices"
+    cta_french: "Retourner des fiches"
+    drag_hint: "faites tourner →"
+    stat_days: "Jours avant l'examen"
+    stat_drills: "Exercices faits"
+    stat_cards: Fiches
+    stat_hours: "Heures d'étude"
+    tile_tcf_kicker: "Bibliothèque d'exercices"
+    tile_tcf_title: "Exercices par tâche"
+    tile_tcf_body: "Cochez au fur et à mesure. La progression est par tâche, et elle est gardée d'une visite à l'autre."
+    tile_tcf_cta: "Ouvrir le suivi →"
+    tile_fr_kicker: Fiches
+    tile_fr_title: "Le français, recto verso"
+    tile_fr_body: "Au recto le terme français. Au verso le sens, le genre et une phrase entendue quelque part."
+    tile_fr_cta: "Retourner des fiches →"
+    tile_log_kicker: Carnet
+    tile_log_title: "Parcours d'apprentissage"
+    tile_log_body: "Des articles plus longs : routines, bilans d'examens blancs, et quelques détours."
+    tile_log_cta: "Lire le carnet →"
+
+  tcf:
+    kicker: "Bibliothèque d'exercices"
+    title: "Exercices par tâche"
+    body: "Cochez au fur et à mesure. La progression est par tâche, et elle est gardée d'une visite à l'autre."
+    search_placeholder: "Chercher un exercice, un thème, une tâche…"
+    clear: Réinitialiser
+    all: Tous
+    no_results: "Aucun exercice pour ces filtres."
+    done_suffix: faits
+    badge_suffix: "faits !"
+
+  french:
+    kicker: Fiches
+    title: "Le français, recto verso"
+    body: "Au recto le terme français. Au verso le sens, le genre et une phrase entendue quelque part."
+    hint: "Cliquez pour retourner · faites glisser pour la lancer"
+    flip: "retourner ↻"
+    all: Toutes
+    reset: "Réinitialiser les fiches"
+
+  blog:
+    kicker: Carnet
+    title: "Parcours d'apprentissage"
+    body: "Des articles plus longs : routines, bilans d'examens blancs, et quelques détours."
+    next: "Article suivant"
+
+  drill:
+    prompt: "La consigne"
+    mark_done: "Marquer comme fait"
+    marked_done: Fait
+    next: "Exercice suivant"
+    back: "Exercices par tâche"
+
+  about:
+    kicker: "À propos"
+    title: "À propos du site"
+    row_goal: Objectif
+    row_exam: Examen
+    row_langs: Langues
+    row_site: Site
+    langs_value: "Interface EN / FR · contenus non traduits"
+
+  footer: "Jekyll · thème Nocturne · fait pour un apprenant têtu"

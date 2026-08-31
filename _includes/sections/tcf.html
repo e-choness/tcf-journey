@@ -1,51 +1,59 @@
 <div class="tcf-header">
   <div class="tcf-intro">
-    <div class="kicker">Drill library</div>
-    <h1>Drills by tâche</h1>
-    <p>Tick them off as you go. Progress is per section, and it's remembered between visits.</p>
+    <div class="kicker" data-i18n-en="{{ site.data.i18n.en.tcf.kicker }}" data-i18n-fr="{{ site.data.i18n.fr.tcf.kicker }}">{{ site.data.i18n.en.tcf.kicker }}</div>
+    <h1 data-i18n-en="{{ site.data.i18n.en.tcf.title }}" data-i18n-fr="{{ site.data.i18n.fr.tcf.title }}">{{ site.data.i18n.en.tcf.title }}</h1>
+    <p data-i18n-en="{{ site.data.i18n.en.tcf.body }}" data-i18n-fr="{{ site.data.i18n.fr.tcf.body }}">{{ site.data.i18n.en.tcf.body }}</p>
+    <span class="done-badge d-only" id="drills-done-badge" style="display:none"
+          data-badge-en="{{ site.data.i18n.en.tcf.badge_suffix }}"
+          data-badge-fr="{{ site.data.i18n.fr.tcf.badge_suffix }}"></span>
   </div>
 
   <div class="skill-cards">
-    <div class="skill-card" data-section="co">
-      <div class="skill-code">CO</div>
-      <div class="skill-name">Listening</div>
-      <div class="skill-progress" id="co-progress">0/3</div>
-    </div>
-    <div class="skill-card" data-section="ce">
-      <div class="skill-code">CE</div>
-      <div class="skill-name">Reading</div>
-      <div class="skill-progress" id="ce-progress">0/0</div>
-    </div>
-    <div class="skill-card" data-section="eo">
-      <div class="skill-code">EO</div>
-      <div class="skill-name">Speaking</div>
-      <div class="skill-progress" id="eo-progress">0/0</div>
-    </div>
-    <div class="skill-card" data-section="ee">
-      <div class="skill-code">EE</div>
-      <div class="skill-name">Writing</div>
-      <div class="skill-progress" id="ee-progress">0/0</div>
-    </div>
+    {% for s in site.data.tcf.sections %}
+    {%- assign total = site.tcf | where: "section", s.id | size -%}
+    <button class="skill-card pop" data-section="{{ s.id }}" aria-pressed="false"
+            data-total="{{ total }}">
+      <svg class="ring-svg" viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="ring-track" cx="22" cy="22" r="18"></circle>
+        <circle class="ring-fill" cx="22" cy="22" r="18"
+                stroke-dasharray="0 113.1" data-ring="{{ s.id }}"></circle>
+      </svg>
+      <span class="skill-text">
+        <span class="skill-code">{{ s.code }}</span>
+        <span class="skill-name"
+              data-i18n-en="{{ s.en }}" data-i18n-fr="{{ s.fr }}">{{ s.en }}</span>
+        <span class="skill-progress" id="{{ s.id }}-progress">0 / {{ total }}</span>
+      </span>
+    </button>
+    {% endfor %}
   </div>
 </div>
 
 <div class="tcf-search">
   <div>
-    <input type="text" id="drill-search" placeholder="Search drills, topics, tâches…" class="search-input">
+    <input type="text" id="drill-search" class="search-input"
+           data-i18n-ph-en="{{ site.data.i18n.en.tcf.search_placeholder }}"
+           data-i18n-ph-fr="{{ site.data.i18n.fr.tcf.search_placeholder }}"
+           placeholder="{{ site.data.i18n.en.tcf.search_placeholder }}">
     <span class="search-icon">&#9906;</span>
   </div>
-  <button id="clear-filters" class="btn btn-secondary">Reset</button>
+  <button id="clear-filters" class="btn btn-secondary"
+          data-i18n-en="{{ site.data.i18n.en.tcf.clear }}"
+          data-i18n-fr="{{ site.data.i18n.fr.tcf.clear }}">{{ site.data.i18n.en.tcf.clear }}</button>
 </div>
 
 <div class="tcf-filters">
   {% for facet in site.data.tcf.facets %}
   <div class="filter-group">
-    <span class="filter-label">{{ facet.en }}</span>
-    <div class="filter-tags" id="{{ facet.key }}-filters">
-      <button class="tag" data-filter="{{ facet.key }}" data-value="">All</button>
+    <span class="filter-label" data-i18n-en="{{ facet.en }}" data-i18n-fr="{{ facet.fr }}">{{ facet.en }}</span>
+    <div class="filter-tags" id="{{ facet.key }}-filters" data-filter="{{ facet.key }}">
+      <button class="tag active" data-filter="{{ facet.key }}" data-value=""
+              data-i18n-en="{{ site.data.i18n.en.tcf.all }}"
+              data-i18n-fr="{{ site.data.i18n.fr.tcf.all }}">{{ site.data.i18n.en.tcf.all }}</button>
       {% if facet.key == "section" %}
         {% for section in site.data.tcf.sections %}
-        <button class="tag" data-filter="section" data-value="{{ section.id }}">{{ section.code }}</button>
+        <button class="tag" data-filter="section" data-value="{{ section.id }}"
+                data-i18n-en="{{ section.en }}" data-i18n-fr="{{ section.fr }}">{{ section.en }}</button>
         {% endfor %}
       {% else %}
         {% for value in facet.values %}
@@ -57,7 +65,11 @@
   {% endfor %}
 </div>
 
-<div class="drills-list" id="drills-list">
+<div class="drills-list" id="drills-list"
+     data-done-en="{{ site.data.i18n.en.tcf.done_suffix }}"
+     data-done-fr="{{ site.data.i18n.fr.tcf.done_suffix }}"
+     data-badge-en="{{ site.data.i18n.en.tcf.badge_suffix }}"
+     data-badge-fr="{{ site.data.i18n.fr.tcf.badge_suffix }}">
   {% if site.tcf %}
     {% assign grouped = site.tcf | group_by: "tache" | sort: "name" %}
   {% else %}
@@ -74,23 +86,30 @@
     </div>
     {% for drill in group.items %}
     <div class="drill-item rowlink" data-section="{{ drill.section }}" data-level="{{ drill.level }}" data-tache="{{ drill.tache }}" data-topic="{{ drill.topic }}" data-id="{{ drill.url | relative_url }}">
-      <button class="drill-done-btn" data-drill-id="{{ drill.url | relative_url }}" title="Mark as done">✓</button>
-      <a href="{{ drill.url | relative_url }}">
-        <span class="drill-code">{{ drill.section | upcase }}</span>
-        <div>
-          <span class="drill-title">{{ drill.title }}</span>
-          <span class="drill-summary">{{ drill.summary }}</span>
-          <span class="drill-tags-inline">
-            <span class="tag tag-accent">{{ drill.tache }}</span>
-            <span class="tag tag-neutral">{{ drill.level }}</span>
-            <span class="tag tag-neutral">{{ drill.topic }}</span>
-          </span>
-        </div>
-        <span class="drill-time" data-drill-id="{{ drill.url | relative_url }}">— min</span>
+      <button class="drill-done-btn" data-drill-id="{{ drill.url | relative_url }}"
+              aria-pressed="false"
+              data-i18n-aria-en="{{ site.data.i18n.en.drill.mark_done }}"
+              data-i18n-aria-fr="{{ site.data.i18n.fr.drill.mark_done }}">✓</button>
+      <span class="drill-code">{{ drill.section | upcase }}</span>
+      <a class="drill-link" href="{{ drill.url | relative_url }}">
+        <span class="drill-title">{{ drill.title }}</span>
+        <span class="drill-summary">{{ drill.summary }}</span>
+        <span class="drill-tags-inline">
+          <span class="tag tag-accent">{{ drill.tache }}</span>
+          <span class="tag tag-neutral">{{ drill.level }}</span>
+          <span class="tag tag-neutral">{{ drill.topic }}</span>
+        </span>
       </a>
+      {%- assign words = drill.content | number_of_words -%}
+      {%- assign mins = words | divided_by: 200.0 | ceil -%}
+      <span class="drill-time">{% if drill.minutes %}{{ drill.minutes }}{% else %}{{ mins }}{% endif %} min</span>
     </div>
     {% endfor %}
   </section>
   {% endfor %}
+
+  <div id="no-results" class="no-results" style="display:none"
+       data-i18n-en="{{ site.data.i18n.en.tcf.no_results }}"
+       data-i18n-fr="{{ site.data.i18n.fr.tcf.no_results }}">{{ site.data.i18n.en.tcf.no_results }}</div>
 </div>
 
