@@ -186,6 +186,13 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTacheProgress();
   });
 
+  // Listen for progress changes from drill page or other tabs (§3.4)
+  document.addEventListener('progresschange', () => {
+    updateDoneBadge();
+    updateProgressDisplays();
+    updateTacheProgress();
+  });
+
   // Initial state
   updateDoneBadge();
   updateProgressDisplays();
