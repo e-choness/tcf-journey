@@ -1,9 +1,9 @@
 <section class="hero-section">
     <div class="hero-left">
         <div class="hero-kicker hand"
-             data-i18n-en="{{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.about.target }}"
-             data-i18n-fr="{{ site.data.i18n.fr.home.kicker | replace: '%TARGET%', site.data.about.target }}">
-            {{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.about.target }}</div>
+             data-i18n-en="{{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.tcf.exam.target }}"
+             data-i18n-fr="{{ site.data.i18n.fr.home.kicker | replace: '%TARGET%', site.data.tcf.exam.target }}">
+            {{ site.data.i18n.en.home.kicker | replace: '%TARGET%', site.data.tcf.exam.target }}</div>
         <h1 class="hero-h1">
             <span data-i18n-en="{{ site.data.i18n.en.home.title_a }}" data-i18n-fr="{{ site.data.i18n.fr.home.title_a }}">{{ site.data.i18n.en.home.title_a }}</span>
             <span class="underline-scribble"
@@ -42,7 +42,7 @@
     <div class="tape"></div>
     <div class="stats-grid">
         <div class="stat" data-reveal>
-            <div class="stat-value" id="days-left" data-exam-date="{% if site.data.about.exam_date != 'TBD' %}{{ site.data.about.exam_date }}{% endif %}">—</div>
+            <div class="stat-value" id="days-left" data-exam-date="{% if site.data.tcf.exam.date != 'TBD' %}{{ site.data.tcf.exam.date }}{% endif %}">—</div>
             <div class="stat-label"
                  data-i18n-en="{{ site.data.i18n.en.home.stat_days }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_days }}">{{ site.data.i18n.en.home.stat_days }}</div>
         </div>
@@ -57,7 +57,7 @@
                  data-i18n-en="{{ site.data.i18n.en.home.stat_cards }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_cards }}">{{ site.data.i18n.en.home.stat_cards }}</div>
         </div>
         <div class="stat" data-reveal>
-            <div class="stat-value">{{ site.data.about.study_hours | default: "—" }}</div>
+            <div class="stat-value">{{ site.data.tcf.exam.study_hours | default: "—" }}</div>
             <div class="stat-label"
                  data-i18n-en="{{ site.data.i18n.en.home.stat_hours }}" data-i18n-fr="{{ site.data.i18n.fr.home.stat_hours }}">{{ site.data.i18n.en.home.stat_hours }}</div>
         </div>
