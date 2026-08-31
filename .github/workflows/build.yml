@@ -30,3 +30,14 @@ jobs:
           echo "Jekyll build failed"
           exit 1
         fi
+
+    - name: Upload pages artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: '_site'
+
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      id: deployment
+      uses: actions/deploy-pages@v2
