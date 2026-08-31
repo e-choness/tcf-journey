@@ -17,9 +17,16 @@ html, body {
   line-height: 1.6;
 }
 
+button, input, select, textarea {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-heading;
-  font-weight: 600;
+  font-weight: 500;
+  font-optical-sizing: auto;
   letter-spacing: -0.02em;
 }
 
