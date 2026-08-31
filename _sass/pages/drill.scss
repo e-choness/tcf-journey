@@ -152,9 +152,9 @@
 .drill-done-btn-large,
 .drill-next-btn {
   padding: $space-md $space-2xl;
-  border: 1px solid var(--color-divider);
-  background: var(--color-surface);
-  color: var(--color-text);
+  border: 2px solid var(--color-divider);
+  background: transparent;
+  color: var(--color-text-muted);
   border-radius: $radius-md;
   font-size: 14px;
   font-weight: 500;
@@ -162,22 +162,23 @@
   transition: all 0.2s;
 
   &:hover {
-    background: var(--color-hover-bg);
+    color: var(--color-text);
     border-color: var(--color-accent);
   }
 }
 
 .drill-done-btn-large {
-  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 
-  &.done {
-    background: var(--color-accent);
-    color: var(--color-bg);
-    border-color: var(--color-accent);
+  &:hover {
+    border-color: var(--color-accent-400);
+    color: var(--color-accent-400);
   }
 
-  &.done:hover {
-    opacity: 0.9;
+  &.done {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 }
 
