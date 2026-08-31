@@ -58,7 +58,11 @@
 </div>
 
 <div class="drills-list" id="drills-list">
-  {% assign grouped = site.tcf | group_by: "tache" | sort: "name" %}
+  {% if site.tcf %}
+    {% assign grouped = site.tcf | group_by: "tache" | sort: "name" %}
+  {% else %}
+    {% assign grouped = empty_array %}
+  {% endif %}
   {% for group in grouped %}
   <section data-reveal class="tache-section" data-tache="{{ group.name | downcase | replace: ' ', '-' }}">
     <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px">
