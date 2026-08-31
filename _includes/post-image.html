@@ -1,0 +1,17 @@
+{%- comment -%}
+  Renders a post's image if it has one. Params:
+    p     — the post/page object (required)
+    class — extra class on the wrapper, e.g. "post-image" or "post-thumb" (required)
+  Emits nothing at all when the post has no image.
+{%- endcomment -%}
+{%- assign src = include.p.image -%}
+{%- if src and src != "" -%}
+  {%- if src contains "://" -%}{%- assign href = src -%}
+  {%- else -%}{%- assign href = src | relative_url -%}{%- endif -%}
+<div class="{{ include.class }} lighten">
+  <img src="{{ href }}"
+       alt="{{ include.p.image_alt | default: '' | escape }}"
+       {% unless include.p.image_alt %}aria-hidden="true"{% endunless %}
+       loading="lazy" decoding="async">
+</div>
+{%- endif -%}

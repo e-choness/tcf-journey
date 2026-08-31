@@ -21,7 +21,7 @@
       <span class="skill-text">
         <span class="skill-code">{{ s.code }}</span>
         <span class="skill-name"
-              data-i18n-en="{{ s.en }}" data-i18n-fr="{{ s.fr }}">{{ s.en }}</span>
+              data-i18n-en="{{ s.en | escape }}" data-i18n-fr="{{ s.fr | escape }}">{{ s.en }}</span>
         <span class="skill-progress" id="{{ s.id }}-progress">0 / {{ total }}</span>
       </span>
     </button>

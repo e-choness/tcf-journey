@@ -7,23 +7,24 @@ layout: default
     <a href="{{ '/blog' | relative_url }}" class="back-link">← Back to blog</a>
 
     <div class="post-header">
-      <h1 class="post-title">{{ page.title }}</h1>
+      <h1 class="post-title"
+          data-i18n-en="{{ page.title | escape }}"
+          data-i18n-fr="{{ page.title_fr | default: page.title | escape }}">{{ page.title }}</h1>
 
       <div class="post-meta">
         <span class="post-date">{{ page.date | date: "%d %b %Y" }}</span>
-        <span class="post-reading-time" id="post-reading-time">— min read</span>
+        {%- assign words = content | number_of_words -%}
+        {%- assign mins = words | divided_by: 200.0 | ceil -%}
+        <span class="post-reading-time">{{ page.minutes | default: mins }} min read</span>
       </div>
     </div>
 
-    {% if page.description %}
-    <p class="post-lead">{{ page.description }}</p>
+    {%- assign lead = page.description | default: page.summary -%}
+    {% if lead %}
+    <p class="post-lead">{{ lead }}</p>
     {% endif %}
 
-    {% if page.image %}
-    <div class="post-image" style="--post-image: url('{{ page.image }}');"></div>
-    {% else %}
-    <div class="post-image wob"></div>
-    {% endif %}
+    {% include post-image.html p=page class="post-image" %}
 
     <div class="post-content">
       {{ content }}

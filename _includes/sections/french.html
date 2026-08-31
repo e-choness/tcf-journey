@@ -51,7 +51,7 @@
       <div class="card-front">
         <div class="card-mark" aria-hidden="true">{{ card.term | remove_first: "le " | remove_first: "la " | remove_first: "l'" | slice: 0 | upcase }}</div>
         <div class="card-category"
-             data-i18n-en="{{ cat.en }}" data-i18n-fr="{{ cat.fr }}">{{ cat.en }}</div>
+             data-i18n-en="{{ cat.en | escape }}" data-i18n-fr="{{ cat.fr | escape }}">{{ cat.en }}</div>
         <div class="card-term">{{ card.term }}</div>
         <div class="card-hint">{{ card.hint }}</div>
         <div class="card-foot">
@@ -71,3 +71,7 @@
   </button>
   {% endfor %}
 </div>
+
+<div id="no-cards" class="empty-state" style="display:none"
+     data-i18n-en="{{ site.data.i18n.en.tcf.no_results }}"
+     data-i18n-fr="{{ site.data.i18n.fr.tcf.no_results }}">{{ site.data.i18n.en.tcf.no_results }}</div>

@@ -108,6 +108,14 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
+.lighten {
+  mix-blend-mode: lighten;
+}
+
+[data-theme="light"] .lighten {
+  mix-blend-mode: multiply;
+}
+
 .wob {
   border-radius: 225px 14px 235px 16px / 16px 230px 14px 240px;
 }

@@ -74,17 +74,6 @@ function nextPost() {
   }
 }
 
-// Reading time estimation
-function readingTime() {
-  const content = document.querySelector('.post-content') || document.querySelector('article');
-  if (!content) return 0;
-
-  const text = content.innerText;
-  const wordsPerMinute = 200;
-  const words = text.split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
-}
-
 // Cursor spotlight effect
 window.addEventListener('pointermove', (e) => {
   const spotlight = document.getElementById('spotlight');

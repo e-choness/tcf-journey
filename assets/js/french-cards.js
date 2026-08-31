@@ -27,8 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
     cards.forEach(card => {
       const matchesCategory = !activeFilters.category || card.dataset.category === activeFilters.category;
       const matchesLevel = !activeFilters.level || card.dataset.level === activeFilters.level;
-      card.style.display = (matchesCategory && matchesLevel) ? 'block' : 'none';
+      card.classList.toggle('is-hidden', !(matchesCategory && matchesLevel));
     });
+    const visible = Array.from(cards).filter(c => !c.classList.contains('is-hidden')).length;
+    const empty = document.getElementById('no-cards');
+    if (empty) empty.style.display = visible ? 'none' : 'block';
   }
 
   // Flip and drag interaction
@@ -67,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     };
 
-    const handlePointerUp = () => {
+    const handlePointerUp = (e) => {
+      if (e && card.hasPointerCapture && card.hasPointerCapture(e.pointerId)) {
+        card.releasePointerCapture(e.pointerId);
+      }
       card.removeEventListener('pointermove', handlePointerMove);
       document.removeEventListener('pointerup', handlePointerUp);
 
@@ -92,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             done = true;
           } else {
             card.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.02}deg)`;
-            card.style.opacity = Math.max(0, 1 - (Math.abs(x) + Math.abs(y)) / 500);
+            card.style.opacity = String(Math.max(0.35, 1 - (Math.abs(x) + Math.abs(y)) / 500));
             requestAnimationFrame(animate);
           }
         };
@@ -108,13 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
       lastX = e.clientX;
       lastY = e.clientY;
       lastTime = Date.now();
+      try { card.setPointerCapture(e.pointerId); } catch (err) {}
       card.addEventListener('pointermove', handlePointerMove);
       document.addEventListener('pointerup', handlePointerUp);
     });
 
-    card.addEventListener('click', (e) => {
+    card.addEventListener('click', () => {
       if (isClickOnly) {
-        card.classList.toggle('flipped');
+        const flipped = card.classList.toggle('flipped');
+        card.setAttribute('aria-pressed', String(flipped));
       }
     });
   });

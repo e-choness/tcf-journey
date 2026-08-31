@@ -10,6 +10,8 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+strict_front_matter: true
+
 # Collections
 collections:
   tcf:

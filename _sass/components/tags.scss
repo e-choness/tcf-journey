@@ -1,6 +1,7 @@
 @use '../variables' as *;
 
 .tag {
+  appearance: none;
   display: inline-block;
   padding: $space-xs $space-lg;
   border: 1px solid var(--color-divider);
@@ -12,8 +13,14 @@
   transition: all 0.2s;
 }
 
+.tag.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
 .tag-outline {
-  background: rgba(111, 98, 184, 0.18);
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
   border-color: var(--color-accent);
   color: var(--color-text);
 }
@@ -31,6 +38,6 @@
 }
 
 .tag:hover {
-  background: rgba(111, 98, 184, 0.18);
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
   color: var(--color-text);
 }

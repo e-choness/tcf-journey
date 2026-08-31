@@ -199,6 +199,18 @@ description: >
 - Listening comprehension much better...
 ```
 
+### Adding an image to a post
+
+Drop the file in `assets/images/blogs/` and add to the post's front matter:
+
+    image: /assets/images/blogs/your-file.jpg
+    image_alt: "One sentence describing the photo"
+
+Paths are site-root-relative — do not include `/tcf-journey`; the include adds the
+baseurl. An absolute `https://…` URL also works. Omit `image:` entirely and no image
+block renders. Prefer photographs on dark or black backgrounds: the theme blends them
+into the page with `mix-blend-mode: lighten`.
+
 ## 🎓 Study Goals & Tracking
 
 | Metric | Goal | Status |

@@ -62,13 +62,13 @@
 .post-image {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(140deg, var(--color-surface), color-mix(in srgb, var(--color-accent) 15%, var(--color-surface)));
-  background-image: var(--post-image);
   border-radius: $radius-lg;
+  overflow: hidden;
   box-shadow: var(--shadow-md);
   margin-bottom: $space-4xl;
-  background-size: cover;
-  background-position: center;
+  background: var(--color-surface);
+
+  img { width: 100%; height: 100%; object-fit: cover; display: block; }
 }
 
 .post-content {

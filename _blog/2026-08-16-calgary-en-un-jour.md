@@ -1,9 +1,10 @@
 ---
 layout: post
 title: Calgary in One Day
-title_fr: Calgary en un jour : itinéraire, culture et trésors cachés
+title_fr: "Calgary en un jour : itinéraire, culture et trésors cachés"
 date: 2026-08-16
-summary: Cette excursion ensoleillée à travers Calgary mène des panoramas du centre TELUS Spark et des Musées militaires jusqu'à un déjeuner gourmand au bord du réservoir Glenmore à Heritage Park. La journée s'achève sur le campus de l'Université de Calgary, entre l'exploration des infrastructures sportives et la découverte fortuite d'un tournoi de Magic: The Gathering.
+summary: "Cette excursion ensoleillée à travers Calgary mène des panoramas du centre TELUS Spark et des Musées militaires jusqu'à un déjeuner gourmand au bord du réservoir Glenmore à Heritage Park. La journée s'achève sur le campus de l'Université de Calgary, entre l'exploration des infrastructures sportives et la découverte fortuite d'un tournoi de Magic: The Gathering."
+image: null
 ---
 
 Hier, nous avons fait une excursion d’une journée autour de Calgary. Il avait plu pendant les quelques jours précédents, alors hier, avec une belle journée ensoleillée, c’était le moment idéal pour partir.

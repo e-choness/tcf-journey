@@ -44,6 +44,7 @@
 }
 
 .skill-card {
+  appearance: none;
   display: flex;
   align-items: center;
   gap: $space-lg;
