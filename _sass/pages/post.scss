@@ -11,7 +11,7 @@
   padding: $space-4xl $space-3xl;
 }
 
-.post-back {
+.back-link {
   display: inline-flex;
   align-items: center;
   color: var(--color-accent);
@@ -23,6 +23,14 @@
   &:hover {
     transform: translateX(-4px);
   }
+}
+
+.post-back {
+  @extend .back-link;
+}
+
+.post-data {
+  display: none;
 }
 
 .post-header {
@@ -55,6 +63,7 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   background: linear-gradient(140deg, var(--color-surface), color-mix(in srgb, var(--color-accent) 15%, var(--color-surface)));
+  background-image: var(--post-image);
   border-radius: $radius-lg;
   box-shadow: var(--shadow-md);
   margin-bottom: $space-4xl;

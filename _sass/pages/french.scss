@@ -37,6 +37,14 @@
   margin-bottom: $space-2xl;
 }
 
+.french-hint {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 22px;
+  font-size: 15px;
+  color: rgba(233, 233, 237, 0.5);
+}
+
 .cards-grid {
   max-width: 1200px;
   margin: 0 auto;
@@ -49,11 +57,16 @@
 .flip-card {
   height: 230px;
   perspective: 1000px;
-  cursor: pointer;
+  cursor: grab;
   transition: transform 0.3s;
+  touch-action: none;
 
   &:hover {
     transform: translateY(-4px);
+  }
+
+  &:active {
+    cursor: grabbing;
   }
 }
 

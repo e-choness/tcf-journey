@@ -4,29 +4,29 @@
         <h1 class="hero-h1">Working through the TCF, <span class="underline-scribble">one drill</span> at a time.</h1>
         <p class="hero-body">A personal workbook: drills grouped by tâche, flip cards for the words that keep slipping, and notes on what actually moved the score.</p>
         <div class="hero-buttons">
-            <a href="{{ '/tcf' | relative_url }}" class="btn btn-primary pop" style="border-radius:12px 5px 13px 6px">Open the drill library</a>
-            <a href="{{ '/french' | relative_url }}" class="btn btn-secondary pop" style="border-radius:6px 13px 5px 12px">Flip some cards</a>
+            <a href="{{ '/tcf' | relative_url }}" class="btn btn-primary pop">Open the drill library</a>
+            <a href="{{ '/french' | relative_url }}" class="btn btn-secondary pop">Flip some cards</a>
         </div>
     </div>
     <div class="hero-right">
-        <div class="cube-wrapper" data-cube style="perspective:900px;touch-action:none">
-            <div data-cube-inner style="position:absolute;inset:0;transform-style:preserve-3d;width:210px;height:210px">
-                <div class="cube-face" style="transform:rotateY(0deg) translateZ(105px)">
+        <div class="cube-wrapper" data-cube>
+            <div data-cube-inner>
+                <div class="cube-face" data-cube-face="0">
                     <span class="cube-code">CO</span>
                     <span class="cube-count" id="cube-co-count">0/3</span>
                     <span class="cube-label">Listening</span>
                 </div>
-                <div class="cube-face" style="transform:rotateY(90deg) translateZ(105px)">
+                <div class="cube-face" data-cube-face="90">
                     <span class="cube-code">CE</span>
                     <span class="cube-count" id="cube-ce-count">0/0</span>
                     <span class="cube-label">Reading</span>
                 </div>
-                <div class="cube-face" style="transform:rotateY(180deg) translateZ(105px)">
+                <div class="cube-face" data-cube-face="180">
                     <span class="cube-code">EO</span>
                     <span class="cube-count" id="cube-eo-count">0/0</span>
                     <span class="cube-label">Speaking</span>
                 </div>
-                <div class="cube-face" style="transform:rotateY(270deg) translateZ(105px)">
+                <div class="cube-face" data-cube-face="270">
                     <span class="cube-code">EE</span>
                     <span class="cube-count" id="cube-ee-count">0/0</span>
                     <span class="cube-label">Writing</span>
@@ -38,8 +38,8 @@
 </section>
 
 <section class="stats-section">
-    <div class="tape" style="top:-10px;left:8%;transform:rotate(-3deg)"></div>
-    <div class="tape" style="bottom:-10px;right:12%;transform:rotate(2.5deg)"></div>
+    <div class="tape"></div>
+    <div class="tape"></div>
     <div class="stats-grid">
         <div class="stat" data-reveal>
             <div class="stat-value" id="days-left" data-exam-date="{% if site.data.about.exam_date != 'TBD' %}{{ site.data.about.exam_date }}{% endif %}">76</div>
@@ -69,17 +69,17 @@
                 <p>Tick them off as you go. Progress is per tâche, and it's remembered between visits.</p>
                 <a href="{{ '/tcf' | relative_url }}" class="btn btn-ghost">Open the tracker →</a>
             </div>
-            <div class="tile-visual pop wob" style="order:2">TCF</div>
+            <div class="tile-visual pop wob">TCF</div>
         </div>
 
         <div class="tile" data-reveal>
-            <div class="tile-content" style="order:2">
+            <div class="tile-content">
                 <div class="tile-kicker">Flip cards</div>
                 <h2>French, front and back</h2>
                 <p>Front is the French term. Back is the meaning, the gender and a sentence I actually heard somewhere.</p>
                 <a href="{{ '/french' | relative_url }}" class="btn btn-ghost">Flip some cards →</a>
             </div>
-            <div class="tile-visual pop wob2" style="order:1">FR</div>
+            <div class="tile-visual pop wob2">FR</div>
         </div>
 
         <div class="tile" data-reveal>
@@ -89,7 +89,7 @@
                 <p>Longer posts: routines, mock-exam post-mortems, and the occasional detour.</p>
                 <a href="{{ '/blog' | relative_url }}" class="btn btn-ghost">Read the journal →</a>
             </div>
-            <div class="tile-visual pop wob" style="order:2">LOG</div>
+            <div class="tile-visual pop wob">LOG</div>
         </div>
     </div>
 </section>

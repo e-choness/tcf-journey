@@ -48,6 +48,14 @@
     background: var(--color-hover-bg);
     padding-left: $space-2xl;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .post-number {

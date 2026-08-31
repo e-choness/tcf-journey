@@ -11,18 +11,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Patrick+Hand&display=swap">
 
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
 </head>
 <body data-theme="dark">
-    <div class="paper" style="position:relative;min-height:100vh;overflow:hidden">
+    <div class="paper">
         <!-- Cursor spotlight -->
-        <div id="spotlight" style="position:fixed;left:0;top:0;width:520px;height:520px;pointer-events:none;z-index:0;background:radial-gradient(circle,color-mix(in srgb,var(--color-accent) 16%,transparent),transparent 62%)"></div>
+        <div id="spotlight"></div>
 
         <!-- Punch holes decoration -->
-        <div class="d-only punch" style="top:150px"></div>
-        <div class="d-only punch" style="top:420px"></div>
-        <div class="d-only punch" style="top:690px"></div>
+        <div class="d-only punch punch-1"></div>
+        <div class="d-only punch punch-2"></div>
+        <div class="d-only punch punch-3"></div>
 
-        <div style="position:relative;z-index:1">
+        <div class="main-wrapper">
             {% include header.html %}
 
             <main class="main-content">
@@ -36,5 +37,10 @@
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/navbar.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/tcf-drills.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/french-cards.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/blog-list.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/drill-page.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/post-page.js' | relative_url }}"></script>
 </body>
 </html>

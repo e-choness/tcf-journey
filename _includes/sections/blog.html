@@ -8,49 +8,21 @@
 
 <div class="posts-list" id="posts-list">
   {% for post in site.blog %}
-  <article class="post-preview rowlink" data-post-id="{{ post.url }}">
+  <article class="post-preview rowlink" data-post-id="{{ post.url | relative_url }}">
     <div class="post-number d-only">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
-    <a href="{{ post.url }}" style="text-decoration:none;color:inherit;flex:1;display:flex;flex-direction:column">
+    <a href="{{ post.url | relative_url }}">
       <div class="post-meta">
         <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
         <span class="meta-divider">·</span>
         <span class="post-read" id="read-time-{{ forloop.index }}">— min</span>
       </div>
-      <h2 style="margin:0">{{ post.title }}</h2>
+      <h2>{{ post.title }}</h2>
       <p class="post-summary">{{ post.summary }}</p>
     </a>
   </article>
   {% endfor %}
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const posts = document.querySelectorAll('.post-preview');
-
-  posts.forEach((post, index) => {
-    const postUrl = post.dataset.postId;
-    const readTimeEl = document.getElementById(`read-time-${index + 1}`);
-
-    fetch(postUrl)
-      .then(r => r.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const content = doc.querySelector('.post-content');
-        if (content) {
-          const text = content.innerText;
-          const wordsPerMinute = 200;
-          const words = text.split(/\s+/).length;
-          const minutes = Math.ceil(words / wordsPerMinute);
-          if (readTimeEl) {
-            readTimeEl.textContent = `${minutes} min`;
-          }
-        }
-      })
-      .catch(() => {});
-  });
-});
-</script>
 
 {% if site.blog.size == 0 %}
 <div class="empty-state">

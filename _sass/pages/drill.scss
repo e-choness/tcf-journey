@@ -11,7 +11,7 @@
   padding: $space-4xl $space-3xl;
 }
 
-.drill-back {
+.back-link {
   display: inline-flex;
   align-items: center;
   color: var(--color-accent);
@@ -23,6 +23,10 @@
   &:hover {
     transform: translateX(-4px);
   }
+}
+
+.drill-back {
+  @extend .back-link;
 }
 
 .drill-header {
@@ -63,6 +67,12 @@
   border-radius: $radius-md;
   background: rgba(111, 98, 184, 0.08);
   border: 1px solid var(--color-divider);
+
+  .tape {
+    top: -10px;
+    left: 20px;
+    transform: rotate(-2deg);
+  }
 }
 
 .brief-label {
@@ -171,8 +181,24 @@
   }
 }
 
+.done-text {
+  display: inline;
+}
+
+.done-check {
+  display: none;
+
+  .drill-done-btn-large.done & {
+    display: inline;
+  }
+}
+
 .drill-next-btn {
   margin-left: auto;
+}
+
+.drill-data {
+  display: none;
 }
 
 // Responsive

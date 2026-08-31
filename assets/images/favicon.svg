@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .favicon-bg { fill: #6f62b8; }
+      .favicon-text { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 28px; font-weight: 600; fill: white; }
+    </style>
+  </defs>
+  <rect class="favicon-bg" x="8" y="8" width="48" height="48" rx="6" ry="6" transform="rotate(-6 32 32)"/>
+  <text class="favicon-text" x="32" y="42" text-anchor="middle">TJ</text>
+</svg>

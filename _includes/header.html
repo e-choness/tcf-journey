@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="mobile-nav" id="mobile-nav" style="display: none;">
+    <div class="mobile-nav" id="mobile-nav">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
         <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}>TCF</a>
         <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}>French</a>

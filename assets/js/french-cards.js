@@ -1,0 +1,106 @@
+// French flip cards - flip on click, drag to throw
+document.addEventListener('DOMContentLoaded', function() {
+  const filterButtons = document.querySelectorAll('.french-filters .tag');
+  const cards = document.querySelectorAll('.flip-card');
+
+  // Category filtering
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.category;
+
+      filterButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      cards.forEach(card => {
+        if (!category || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Flip and drag interaction
+  cards.forEach(card => {
+    let isClickOnly = true;
+    let startX = 0;
+    let startY = 0;
+    let velocityX = 0;
+    let velocityY = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let lastTime = 0;
+
+    card.addEventListener('pointerdown', (e) => {
+      isClickOnly = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastTime = Date.now();
+    });
+
+    document.addEventListener('pointermove', (e) => {
+      if (e.target !== card && !card.contains(e.target)) return;
+
+      const deltaX = e.clientX - lastX;
+      const deltaY = e.clientY - lastY;
+      const deltaTime = Date.now() - lastTime;
+
+      if (deltaTime > 0) {
+        velocityX = deltaX / deltaTime;
+        velocityY = deltaY / deltaTime;
+      }
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastTime = Date.now();
+
+      const movementX = Math.abs(e.clientX - startX);
+      const movementY = Math.abs(e.clientY - startY);
+
+      if (movementX > 5 || movementY > 5) {
+        isClickOnly = false;
+        card.style.transform = `translate(${e.clientX - startX}px, ${e.clientY - startY}px) rotate(${(e.clientX - startX) * 0.02}deg)`;
+      }
+    });
+
+    document.addEventListener('pointerup', () => {
+      if (!isClickOnly) {
+        // Animate throw
+        let x = 0;
+        let y = 0;
+        let vx = velocityX * 100;
+        let vy = velocityY * 100;
+        const friction = 0.96;
+        let done = false;
+
+        const animate = () => {
+          x += vx;
+          y += vy;
+          vx *= friction;
+          vy *= friction;
+
+          if (Math.abs(vx) < 0.1 && Math.abs(vy) < 0.1) {
+            card.style.transform = '';
+            card.style.opacity = '1';
+            done = true;
+          } else {
+            card.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.02}deg)`;
+            card.style.opacity = Math.max(0, 1 - (Math.abs(x) + Math.abs(y)) / 500);
+            requestAnimationFrame(animate);
+          }
+        };
+
+        if (!done) animate();
+      }
+    });
+
+    card.addEventListener('click', (e) => {
+      if (isClickOnly) {
+        card.classList.toggle('flipped');
+      }
+    });
+  });
+});

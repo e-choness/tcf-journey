@@ -129,6 +129,20 @@
   margin-bottom: $space-3xl;
   flex-wrap: wrap;
   align-items: center;
+
+  > div:first-child {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 11px;
+    top: 12px;
+    font-size: 14px;
+    opacity: 0.5;
+  }
 }
 
 .search-input {
@@ -197,12 +211,28 @@
     opacity: 1;
     transform: none;
   }
+
+  // Header row: tache name + progress label
+  > div:first-child {
+    display: flex;
+    align-items: baseline;
+    gap: $space-2xl;
+    margin-bottom: 6px;
+  }
 }
 
 .tache-section h2 {
-  font-size: 32px;
+  font-size: 26px;
   letter-spacing: -0.02em;
-  margin: 0 0 $space-lg;
+  margin: 0;
+}
+
+.tache-progress-container {
+  height: 6px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--color-text) 9%, transparent);
+  overflow: hidden;
+  margin-bottom: 8px;
 }
 
 .tache-progress-label {
@@ -226,11 +256,60 @@
   padding: $space-2xl $space-sm;
   border-bottom: 1px solid var(--color-divider);
   transition: background 0.18s, padding-left 0.18s, transform 0.18s;
+  position: relative;
 
   &:hover {
     background: var(--color-hover-bg);
     padding-left: $space-2xl;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: $space-2xl;
+    align-items: start;
+  }
+}
+
+.drill-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.drill-summary {
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  max-width: 620px;
+  margin-bottom: 9px;
+}
+
+.drill-tags-inline {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+
+  .tag {
+    &.tag-accent {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border: none;
+    }
+  }
+}
+
+.drill-time {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  white-space: nowrap;
+  padding-top: 5px;
 }
 
 .drill-done-btn {

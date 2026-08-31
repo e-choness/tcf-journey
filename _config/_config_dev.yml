@@ -2,7 +2,7 @@ title: TCF Journey
 description: Learning French in public — tracking TCF preparation with drills, vocabulary, and study notes.
 author: echo
 url: http://localhost:4000
-baseurl: ""
+baseurl: /tcf-journey
 
 # Build settings
 markdown: kramdown

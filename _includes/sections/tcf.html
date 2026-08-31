@@ -30,9 +30,9 @@
 </div>
 
 <div class="tcf-search">
-  <div style="position:relative;flex:1;min-width:250px">
-    <input type="text" id="drill-search" placeholder="Search drills, topics, tâches…" class="search-input" style="padding-left:34px">
-    <span style="position:absolute;left:11px;top:12px;font-size:14px;opacity:0.5">&#9906;</span>
+  <div>
+    <input type="text" id="drill-search" placeholder="Search drills, topics, tâches…" class="search-input">
+    <span class="search-icon">&#9906;</span>
   </div>
   <button id="clear-filters" class="btn btn-secondary">Reset</button>
 </div>
@@ -65,28 +65,28 @@
   {% endif %}
   {% for group in grouped %}
   <section data-reveal class="tache-section" data-tache="{{ group.name | downcase | replace: ' ', '-' }}">
-    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px">
-      <h2 style="font-size:26px;letter-spacing:-0.02em;margin:0">{{ group.name }}</h2>
-      <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent)" class="tache-progress-label">0 / {{ group.items | size }}</span>
+    <div>
+      <h2>{{ group.name }}</h2>
+      <span class="tache-progress-label">0 / {{ group.items | size }}</span>
     </div>
-    <div style="height:6px;border-radius:99px;background:color-mix(in srgb, var(--color-text) 9%, transparent);overflow:hidden;margin-bottom:8px">
-      <div class="tache-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg, var(--color-accent-600), var(--color-accent));transition:width 0.5s cubic-bezier(0.2, 0.9, 0.3, 1)"></div>
+    <div class="tache-progress-container">
+      <div class="tache-progress-bar"></div>
     </div>
     {% for drill in group.items %}
-    <div class="drill-item rowlink" data-section="{{ drill.section }}" data-level="{{ drill.level }}" data-tache="{{ drill.tache }}" data-topic="{{ drill.topic }}" data-id="{{ drill.url }}">
-      <button class="drill-done-btn" data-drill-id="{{ drill.url }}" title="Mark as done" style="width:24px;height:24px;margin-top:3px;cursor:pointer;border:1px solid var(--color-divider);background:transparent;color:transparent;border-radius:8px 3px 9px 4px;font-size:13px;line-height:1">✓</button>
-      <a href="{{ drill.url }}" style="text-decoration:none;color:inherit;flex:1;display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:start">
+    <div class="drill-item rowlink" data-section="{{ drill.section }}" data-level="{{ drill.level }}" data-tache="{{ drill.tache }}" data-topic="{{ drill.topic }}" data-id="{{ drill.url | relative_url }}">
+      <button class="drill-done-btn" data-drill-id="{{ drill.url | relative_url }}" title="Mark as done">✓</button>
+      <a href="{{ drill.url | relative_url }}">
         <span class="drill-code">{{ drill.section | upcase }}</span>
         <div>
-          <span style="display:block;font-family:var(--font-heading);font-size:19px;line-height:1.25;margin:0">{{ drill.title }}</span>
-          <span style="display:block;font-size:13px;margin-top:5px;color:color-mix(in srgb, var(--color-text) 60%, transparent);max-width:620px;margin-bottom:9px">{{ drill.summary }}</span>
-          <span style="display:flex;gap:6px;flex-wrap:wrap">
-            <span class="tag" style="background:var(--color-accent);color:var(--color-bg);border:none">{{ drill.tache }}</span>
+          <span class="drill-title">{{ drill.title }}</span>
+          <span class="drill-summary">{{ drill.summary }}</span>
+          <span class="drill-tags-inline">
+            <span class="tag tag-accent">{{ drill.tache }}</span>
             <span class="tag tag-neutral">{{ drill.level }}</span>
             <span class="tag tag-neutral">{{ drill.topic }}</span>
           </span>
         </div>
-        <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent);white-space:nowrap;padding-top:5px" class="drill-time" data-drill-id="{{ drill.url }}">— min</span>
+        <span class="drill-time" data-drill-id="{{ drill.url | relative_url }}">— min</span>
       </a>
     </div>
     {% endfor %}
@@ -94,196 +94,3 @@
   {% endfor %}
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const filterTags = document.querySelectorAll('.filter-tags .tag');
-  const searchInput = document.getElementById('drill-search');
-  const drillItems = document.querySelectorAll('.drill-item');
-  const doneBtns = document.querySelectorAll('.drill-done-btn');
-  const rings = document.querySelectorAll('.ring');
-  const tacheSections = document.querySelectorAll('.tache-section');
-  let activeFilters = {};
-
-  // Calculate reading time for each drill
-  function calculateReadingTime(drillId) {
-    const timeEl = document.querySelector(`[data-drill-id="${drillId}"].drill-time`);
-    if (!timeEl) return;
-
-    fetch(drillId)
-      .then(r => r.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const content = doc.querySelector('.drill-content') || doc.querySelector('article');
-        if (content) {
-          const text = content.innerText;
-          const wordsPerMinute = 200;
-          const words = text.split(/\s+/).length;
-          const minutes = Math.ceil(words / wordsPerMinute);
-          timeEl.textContent = `— ${minutes} min`;
-        }
-      })
-      .catch(() => {});
-  }
-
-  drillItems.forEach(item => {
-    const drillId = item.dataset.id;
-    if (drillId) {
-      calculateReadingTime(drillId);
-    }
-  });
-
-  // Done button handling
-  doneBtns.forEach(btn => {
-    const drillId = btn.dataset.drillId;
-
-    // Restore state from localStorage
-    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-    if (progress[drillId]) {
-      btn.classList.add('done');
-      btn.style.background = 'var(--color-accent)';
-      btn.style.color = 'var(--color-bg)';
-      btn.style.borderColor = 'var(--color-accent)';
-    }
-
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-      progress[drillId] = !progress[drillId];
-      localStorage.setItem('tcf-journey-progress', JSON.stringify(progress));
-
-      this.classList.toggle('done');
-      if (this.classList.contains('done')) {
-        this.style.background = 'var(--color-accent)';
-        this.style.color = 'var(--color-bg)';
-        this.style.borderColor = 'var(--color-accent)';
-      } else {
-        this.style.background = 'transparent';
-        this.style.color = 'transparent';
-        this.style.borderColor = 'var(--color-divider)';
-      }
-      updateDoneBadge();
-      updateProgressDisplays();
-      updateTacheProgress();
-    });
-  });
-
-  // Update done badge with count
-  function updateDoneBadge() {
-    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-    const count = Object.values(progress).filter(Boolean).length;
-    const badge = document.getElementById('drills-done-badge');
-    if (badge) {
-      if (count > 0) {
-        badge.textContent = `${count} done`;
-        badge.style.display = 'inline-block';
-      } else {
-        badge.style.display = 'none';
-      }
-    }
-  }
-
-  // Update progress displays (skill cards)
-  function updateProgressDisplays() {
-    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-    const sections = ['co', 'ce', 'eo', 'ee'];
-
-    sections.forEach(section => {
-      const total = drillItems.filter(item => item.dataset.section === section).length;
-      const done = Array.from(drillItems)
-        .filter(item => item.dataset.section === section)
-        .filter(item => progress[item.dataset.id])
-        .length;
-
-      const progressEl = document.getElementById(`${section}-progress`);
-      if (progressEl) {
-        progressEl.textContent = `${done}/${total}`;
-      }
-    });
-  }
-
-  // Update tâche progress bars
-  function updateTacheProgress() {
-    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-
-    tacheSections.forEach(section => {
-      const items = section.querySelectorAll('.drill-item');
-      const done = Array.from(items).filter(item => progress[item.dataset.id]).length;
-      const total = items.length;
-      const percent = total > 0 ? (done / total) * 100 : 0;
-
-      const label = section.querySelector('.tache-progress-label');
-      const bar = section.querySelector('.tache-progress-bar');
-
-      if (label) label.textContent = `${done} / ${total}`;
-      if (bar) bar.style.width = `${percent}%`;
-    });
-  }
-
-  // Filter handling
-  filterTags.forEach(tag => {
-    tag.addEventListener('click', function() {
-      const filterType = this.dataset.filter;
-      const filterValue = this.dataset.value;
-
-      if (filterValue) {
-        activeFilters[filterType] = filterValue;
-      } else {
-        delete activeFilters[filterType];
-      }
-
-      filterDrills();
-    });
-  });
-
-  // Skill card click handling
-  document.querySelectorAll('.skill-card').forEach(card => {
-    card.addEventListener('click', function() {
-      const section = this.dataset.section;
-      if (activeFilters.section === section) {
-        delete activeFilters.section;
-      } else {
-        activeFilters.section = section;
-      }
-      filterDrills();
-    });
-  });
-
-  searchInput.addEventListener('input', filterDrills);
-
-  document.getElementById('clear-filters').addEventListener('click', function() {
-    activeFilters = {};
-    searchInput.value = '';
-    filterDrills();
-  });
-
-  function filterDrills() {
-    const query = searchInput.value.toLowerCase();
-
-    drillItems.forEach(item => {
-      let show = true;
-
-      if (activeFilters.section && item.dataset.section !== activeFilters.section) {
-        show = false;
-      }
-      if (activeFilters.level && item.dataset.level !== activeFilters.level) {
-        show = false;
-      }
-      if (activeFilters.topic && item.dataset.topic !== activeFilters.topic) {
-        show = false;
-      }
-
-      if (query && !item.textContent.toLowerCase().includes(query)) {
-        show = false;
-      }
-
-      item.style.display = show ? 'grid' : 'none';
-    });
-  }
-
-  // Initial state
-  updateDoneBadge();
-  updateProgressDisplays();
-  updateTacheProgress();
-});
-</script>
