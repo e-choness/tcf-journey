@@ -5,7 +5,7 @@
             <span class="site-title">{{ site.title }}</span>
         </a>
 
-        <nav class="site-nav desktop-only">
+        <nav class="site-nav d-only">
             <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
             <a href="{{ '/tcf' | relative_url }}" {% if page.url contains '/tcf' %}class="active"{% endif %}>TCF</a>
             <a href="{{ '/french' | relative_url }}" {% if page.url contains '/french' %}class="active"{% endif %}>French</a>
@@ -19,7 +19,7 @@
                 <span class="lang-fr">FR</span>
             </button>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☾</button>
-            <button class="menu-toggle mobile-only" id="menu-toggle" aria-label="Menu">☰</button>
+            <button class="menu-toggle m-only" id="menu-toggle" aria-label="Menu">☰</button>
         </div>
     </div>
 
