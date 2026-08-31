@@ -16,7 +16,7 @@
         <span class="meta-divider">·</span>
         <span class="post-read" id="read-time-{{ forloop.index }}">— min</span>
       </div>
-      <h2>{{ post.title }}</h2>
+      <h2 data-i18n-en="{{ post.title }}" data-i18n-fr="{{ post.title_fr | default: post.title }}">{{ post.title }}</h2>
       <p class="post-summary">{{ post.summary }}</p>
     </a>
   </article>

@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Une excursion d’une journée autour de Banff
+title: A Day Trip Around Banff
+title_fr: Une excursion d’une journée autour de Banff
 date: 2026-08-18
 summary: Récit de notre journée à Banff : le canyon Johnston, le panneau de la ville, Cave and Basin, et la vue depuis le sommet du mont Sulphur.
 ---
