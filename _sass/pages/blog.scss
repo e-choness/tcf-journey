@@ -38,12 +38,28 @@
 .post-preview {
   padding: $space-xl $space-sm;
   border-bottom: 1px solid var(--color-divider);
-  transition: background 0.18s;
+  transition: background 0.18s, padding-left 0.18s;
+  display: flex;
+  gap: $space-lg;
+  align-items: center;
+  position: relative;
 
   &:hover {
     background: var(--color-hover-bg);
     padding-left: $space-2xl;
   }
+}
+
+.post-number {
+  font-family: $font-heading;
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--color-text) 8%, transparent);
+  flex: none;
+  width: 120px;
+  text-align: right;
 }
 
 .post-meta {
