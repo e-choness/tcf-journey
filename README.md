@@ -1,22 +1,72 @@
-# CODING AGENTS: READ THIS FIRST
+# TCF Journey
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+A personal study journal for preparing for the **TCF Canada exam** (C1 level).
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+The site tracks:
+- **Drill progress** by tâche (listening, reading, speaking, writing)
+- **Flashcards** for French vocabulary and grammar
+- **Study journal** with reflection posts on what's working
 
-## What you should do — IMPORTANT
+## Features
 
-**Read `tcf-prep-and-blog-site-design/project/TCF Journey.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+- **Dark/light theme** toggle with persistent preference
+- **Progress tracking** stored in browser localStorage (drills marked done persist across visits)
+- **3D cube visualization** showing progress per section
+- **Cursor spotlight** effect following mouse movement
+- **Responsive design** with mobile navigation
+- **Automatic GitHub Pages deployment** on push to main
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+## Tech Stack
 
-## About the design files
+- **Jekyll 4.4** — static site generator
+- **SCSS** — styling with CSS custom properties for theming
+- **Vanilla JS** — no framework dependencies
+- **GitHub Pages** — free hosting with Actions CI/CD
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+## Local Development
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+### Setup
 
-## Bundle contents
+```bash
+# Install dependencies
+bundle install
 
-- `tcf-prep-and-blog-site-design/README.md` — this file
-- `tcf-prep-and-blog-site-design/project/` — the `TCF Prep and Blog Site Design` project files (HTML prototypes, assets, components)
+# Start local server with live reload
+docker-compose up
+```
+
+Site runs at `http://localhost:4000`
+
+### Key Files
+
+- `_config.yml` — site config, collections, variables
+- `_data/` — YAML data files (about, TCF metadata, French cards)
+- `_includes/sections/` — page sections (home, TCF, French, blog)
+- `_sass/` — stylesheets organized by component/page
+- `assets/js/` — JavaScript for interactive features
+- `.github/workflows/build.yml` — GitHub Actions CI/CD pipeline
+
+## Deployment
+
+1. Enable GitHub Pages in repository settings:
+   - Go to Settings → Pages
+   - Set Source to "GitHub Actions"
+   
+2. Push to `main` branch:
+   ```bash
+   git push origin main
+   ```
+   
+   GitHub Actions will automatically build and deploy the site.
+
+## Content Structure
+
+- **Drills** — Jekyll collection in `_tcf/`, grouped by tâche with progress tracking
+- **French cards** — Jekyll collection in `_french/`, flip cards with term/meaning
+- **Posts** — Blog posts in `_posts/`, date-based Jekyll convention
+
+## Exam Goal
+
+- **Level:** C1 (400+ per section)
+- **Exam Date:** TBD (update in `_data/about.yml`)
+- **Study Time:** Tracked locally in localStorage
