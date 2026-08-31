@@ -24,6 +24,21 @@ function loadProgress() {
       if (drillsDone) {
         drillsDone.textContent = Object.keys(progress).length;
       }
+
+      // Update cube face counts by section
+      const sections = ['co', 'ce', 'eo', 'ee'];
+      sections.forEach(section => {
+        const cubeCountEl = document.getElementById(`cube-${section}-count`);
+        const skillProgressEl = document.getElementById(`${section}-progress`);
+        if (cubeCountEl || skillProgressEl) {
+          const allDrills = Array.from(document.querySelectorAll(`[data-section="${section}"]`));
+          const done = allDrills.filter(drill => progress[drill.dataset.id]).length;
+          const total = allDrills.length;
+          const text = `${done}/${total}`;
+          if (cubeCountEl) cubeCountEl.textContent = text;
+          if (skillProgressEl) skillProgressEl.textContent = text;
+        }
+      });
     } catch (e) {
       console.error('Error loading progress:', e);
     }
