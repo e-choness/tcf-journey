@@ -46,20 +46,22 @@
 .site-nav {
   display: flex;
   align-items: center;
-  gap: $space-2xl;
+  gap: 6px;
 
   a {
     text-decoration: none;
     font-size: 14px;
-    color: var(--color-text-muted);
-    transition: color 0.2s;
-    padding-bottom: 3px;
-    border-bottom: 1px solid transparent;
+    color: color-mix(in srgb, var(--color-text) 74%, transparent);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.18s;
 
     &:hover,
     &.active {
-      color: var(--color-accent);
-      border-bottom-color: var(--color-accent);
+      color: var(--color-bg);
+      background: var(--color-accent);
+      border-radius: 9px 4px 10px 5px;
+      transform: rotate(-1.5deg);
     }
   }
 }
