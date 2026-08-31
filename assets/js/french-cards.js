@@ -1,25 +1,35 @@
 // French flip cards - flip on click, drag to throw
 document.addEventListener('DOMContentLoaded', function() {
-  const filterButtons = document.querySelectorAll('.french-filters .tag');
   const cards = document.querySelectorAll('.flip-card');
+  let activeFilters = { category: '', level: '' };
 
-  // Category filtering
-  filterButtons.forEach(button => {
+  // Category and level filtering (§9.2)
+  document.querySelectorAll('[data-filter="category"] .tag').forEach(button => {
     button.addEventListener('click', function() {
-      const category = this.dataset.category;
-
-      filterButtons.forEach(b => b.classList.remove('active'));
+      activeFilters.category = this.dataset.category || '';
+      document.querySelectorAll('[data-filter="category"] .tag').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-
-      cards.forEach(card => {
-        if (!category || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      applyFilters();
     });
   });
+
+  document.querySelectorAll('[data-filter="level"] .tag').forEach(button => {
+    button.addEventListener('click', function() {
+      activeFilters.level = this.dataset.level || '';
+      document.querySelectorAll('[data-filter="level"] .tag').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  // Apply both filters simultaneously
+  function applyFilters() {
+    cards.forEach(card => {
+      const matchesCategory = !activeFilters.category || card.dataset.category === activeFilters.category;
+      const matchesLevel = !activeFilters.level || card.dataset.level === activeFilters.level;
+      card.style.display = (matchesCategory && matchesLevel) ? 'block' : 'none';
+    });
+  }
 
   // Flip and drag interaction
   cards.forEach(card => {

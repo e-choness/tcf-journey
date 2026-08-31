@@ -135,6 +135,17 @@
   transform: rotateY(180deg);
 }
 
+.card-mark {
+  position: absolute;
+  top: $space-lg;
+  right: $space-lg;
+  font-size: 56px;
+  font-weight: 700;
+  color: rgba(233, 233, 237, 0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+
 .card-category {
   font-size: 10px;
   letter-spacing: 0.12em;
