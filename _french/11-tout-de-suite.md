@@ -2,7 +2,7 @@
 layout: card
 term: tout de suite
 category: expression
-gender: null
+gender: "locution"
 level: B1
 hint: immédiatement
 meaning: "Right away; immediately"
