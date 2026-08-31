@@ -1,13 +1,25 @@
 // Main functionality
 document.addEventListener('DOMContentLoaded', function() {
   // Calculate days left to exam
-  const examDate = new Date('2026-11-14');
-  const today = new Date();
-  const daysLeft = Math.max(0, Math.ceil((examDate - today) / (1000 * 60 * 60 * 24)));
-
   const daysElement = document.getElementById('days-left');
   if (daysElement) {
-    daysElement.textContent = daysLeft;
+    // Try to get exam date from data attribute
+    const examDateStr = daysElement.dataset.examDate || daysElement.getAttribute('data-exam-date');
+
+    if (examDateStr && examDateStr !== 'TBD' && examDateStr !== '') {
+      try {
+        const examDate = new Date(examDateStr);
+        const today = new Date();
+        const daysLeft = Math.max(0, Math.ceil((examDate - today) / (1000 * 60 * 60 * 24)));
+        daysElement.textContent = daysLeft;
+      } catch (e) {
+        // If date parsing fails, show placeholder
+        daysElement.textContent = '—';
+      }
+    } else {
+      // Date is TBD or not available
+      daysElement.textContent = '—';
+    }
   }
 
   // Load progress from localStorage
