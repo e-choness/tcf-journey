@@ -179,6 +179,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Reorder tâche sections to match tcf.yml order (§8.3)
+  const tacheOrder = ['Tâche 1', 'Tâche 2', 'Tâche 3'];
+  const listContainer = document.querySelector('.drills-list');
+  if (listContainer) {
+    const sections = Array.from(listContainer.querySelectorAll('.tache-section'));
+    sections.sort((a, b) => {
+      const aName = a.querySelector('h2')?.textContent || '';
+      const bName = b.querySelector('h2')?.textContent || '';
+      return tacheOrder.indexOf(aName) - tacheOrder.indexOf(bName);
+    });
+    sections.forEach(sec => listContainer.appendChild(sec));
+  }
+
   // Listen for language changes (§1.5)
   document.addEventListener('langchange', () => {
     updateDoneBadge();
