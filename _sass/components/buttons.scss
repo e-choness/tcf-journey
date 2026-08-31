@@ -2,7 +2,7 @@
 
 .btn {
   display: inline-block;
-  padding: $space-sm $space-lg;
+  padding: $space-md $space-lg;
   text-decoration: none;
   font-size: 14px;
   font-family: $font-heading;
@@ -11,6 +11,10 @@
   text-align: center;
   background: transparent;
   border: 2px solid;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
