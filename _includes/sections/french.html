@@ -14,7 +14,10 @@
   <button class="tag" data-category="expression">Expression</button>
 </div>
 
-<div class="french-hint hand">Click a card to flip · drag it to throw it around</div>
+<div class="french-hint hand">
+  Click a card to flip · drag it to throw it around
+  <button id="reset-cards" class="reset-btn" aria-label="Reset cards">↻</button>
+</div>
 
 <div class="cards-grid" id="cards-grid">
   {% for card in site.french %}

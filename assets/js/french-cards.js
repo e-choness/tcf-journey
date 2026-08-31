@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Flip and drag interaction
   cards.forEach(card => {
     let isClickOnly = true;
-    let isPointerDown = false;
     let startX = 0;
     let startY = 0;
     let velocityX = 0;
@@ -33,18 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastY = 0;
     let lastTime = 0;
 
-    card.addEventListener('pointerdown', (e) => {
-      isClickOnly = true;
-      isPointerDown = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      lastTime = Date.now();
-    });
-
-    document.addEventListener('pointermove', (e) => {
-      if (!isPointerDown || (e.target !== card && !card.contains(e.target))) return;
+    const handlePointerMove = (e) => {
+      if (!(e.buttons & 1)) return; // Check if primary button is held down
 
       const deltaX = e.clientX - lastX;
       const deltaY = e.clientY - lastY;
@@ -66,10 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
         isClickOnly = false;
         card.style.transform = `translate(${e.clientX - startX}px, ${e.clientY - startY}px) rotate(${(e.clientX - startX) * 0.02}deg)`;
       }
-    });
+    };
 
-    document.addEventListener('pointerup', () => {
-      isPointerDown = false;
+    const handlePointerUp = () => {
+      card.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerup', handlePointerUp);
+
       if (!isClickOnly) {
         // Animate throw
         let x = 0;
@@ -98,6 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!done) animate();
       }
+    };
+
+    card.addEventListener('pointerdown', (e) => {
+      isClickOnly = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastTime = Date.now();
+      card.addEventListener('pointermove', handlePointerMove);
+      document.addEventListener('pointerup', handlePointerUp);
     });
 
     card.addEventListener('click', (e) => {
@@ -106,4 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // Reset cards button
+  const resetBtn = document.getElementById('reset-cards');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      cards.forEach(card => {
+        card.style.transform = '';
+        card.style.opacity = '1';
+      });
+    });
+  }
 });
