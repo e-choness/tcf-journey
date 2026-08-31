@@ -19,27 +19,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (!drillId) return;
 
-  // Restore done state
-  const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-  if (progress[drillId]) {
-    doneBtn.classList.add('done');
-    doneBtn.querySelector('.done-text').style.display = 'none';
-    doneBtn.querySelector('.done-check').style.display = 'inline';
+  function updateButtonState() {
+    const isDone = window.Progress.isDone(drillId);
+    doneBtn.setAttribute('aria-pressed', isDone ? 'true' : 'false');
+
+    const doneText = doneBtn.querySelector('.done-text');
+    const doneCheck = doneBtn.querySelector('.done-check');
+
+    if (isDone) {
+      doneText.style.display = 'none';
+      doneCheck.style.display = 'inline';
+    } else {
+      doneText.style.display = 'inline';
+      doneCheck.style.display = 'none';
+    }
   }
+
+  // Set initial state
+  updateButtonState();
 
   // Done button handler
   doneBtn.addEventListener('click', function() {
-    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-    progress[drillId] = !progress[drillId];
-    localStorage.setItem('tcf-journey-progress', JSON.stringify(progress));
+    const isDone = window.Progress.toggle(drillId);
+    updateButtonState();
 
-    this.classList.toggle('done');
-    if (progress[drillId]) {
-      this.querySelector('.done-text').style.display = 'none';
-      this.querySelector('.done-check').style.display = 'inline';
-    } else {
-      this.querySelector('.done-text').style.display = 'inline';
-      this.querySelector('.done-check').style.display = 'none';
+    // Fire confetti on mark done
+    if (isDone) {
+      window.Progress.confetti(doneBtn);
+    }
+  });
+
+  // Update on progress change from other tabs
+  document.addEventListener('progresschange', (e) => {
+    if (e.detail.id === drillId) {
+      updateButtonState();
     }
   });
 

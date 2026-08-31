@@ -22,62 +22,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Load progress from localStorage
-  loadProgress();
+  // Initialize progress display
+  updateProgressDisplay();
 });
 
-// Progress tracking
-function loadProgress() {
-  const stored = localStorage.getItem('tcf-journey-progress');
-  if (stored) {
-    try {
-      const progress = JSON.parse(stored);
-      const drillsDone = document.getElementById('drills-done');
-      if (drillsDone) {
-        drillsDone.textContent = Object.keys(progress).length;
-      }
+// Progress display (read-only, updated on progresschange events and load)
+function updateProgressDisplay() {
+  const drillsDone = document.getElementById('drills-done');
+  if (drillsDone) {
+    drillsDone.textContent = window.Progress.count();
+  }
 
-      // Update cube face counts by section
-      const sections = ['co', 'ce', 'eo', 'ee'];
-      sections.forEach(section => {
-        const cubeCountEl = document.getElementById(`cube-${section}-count`);
-        const skillProgressEl = document.getElementById(`${section}-progress`);
-        if (cubeCountEl || skillProgressEl) {
-          const allDrills = Array.from(document.querySelectorAll(`[data-section="${section}"]`));
-          const done = allDrills.filter(drill => progress[drill.dataset.id]).length;
-          const total = allDrills.length;
-          const text = `${done}/${total}`;
-          if (cubeCountEl) cubeCountEl.textContent = text;
-          if (skillProgressEl) skillProgressEl.textContent = text;
-        }
-      });
-    } catch (e) {
-      console.error('Error loading progress:', e);
-    }
+  // Update cube face counts by section
+  const sections = ['co', 'ce', 'eo', 'ee'];
+  sections.forEach(section => {
+    updateSectionProgress(section);
+  });
+}
+
+function updateSectionProgress(section) {
+  const cubeCountEl = document.getElementById(`cube-${section}-count`);
+  const skillProgressEl = document.getElementById(`${section}-progress`);
+  if (cubeCountEl || skillProgressEl) {
+    const allDrills = Array.from(document.querySelectorAll(`[data-section="${section}"]`));
+    const done = allDrills.filter(drill => window.Progress.isDone(drill.dataset.id)).length;
+    const total = allDrills.length;
+    const text = `${done}/${total}`;
+    if (cubeCountEl) cubeCountEl.textContent = text;
+    if (skillProgressEl) skillProgressEl.textContent = text;
   }
 }
 
-function saveProgress() {
-  const progress = {};
-  document.querySelectorAll('.drill-item.done').forEach(item => {
-    progress[item.dataset.id] = true;
-  });
-  localStorage.setItem('tcf-journey-progress', JSON.stringify(progress));
-  loadProgress();
-}
-
-function markDone(button) {
-  const drillId = document.querySelector('[data-drill-id]')?.dataset.drillId;
-  if (!drillId) return;
-
-  const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
-  progress[drillId] = !progress[drillId];
-  localStorage.setItem('tcf-journey-progress', JSON.stringify(progress));
-
-  button.textContent = progress[drillId] ? '✓ Done' : 'Mark as done';
-  button.classList.toggle('done');
-  loadProgress();
-}
+// Listen for progress changes
+document.addEventListener('progresschange', (e) => {
+  updateProgressDisplay();
+});
 
 function nextDrill() {
   const drills = Array.from(document.querySelectorAll('.drill-item'));
