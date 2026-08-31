@@ -12,12 +12,14 @@ html, body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: $font-body;
+  font-weight: 400;
   overflow-x: hidden;
   line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-heading;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -222,6 +224,7 @@ a {
   --shadow-lg: #{$shadow-lg};
   --font-heading: #{$font-heading};
   --font-body: #{$font-body};
+  --font-hand: #{$font-hand};
 }
 
 [data-theme="light"] {
