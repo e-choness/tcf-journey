@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Flip and drag interaction
   cards.forEach(card => {
     let isClickOnly = true;
+    let isPointerDown = false;
     let startX = 0;
     let startY = 0;
     let velocityX = 0;
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     card.addEventListener('pointerdown', (e) => {
       isClickOnly = true;
+      isPointerDown = true;
       startX = e.clientX;
       startY = e.clientY;
       lastX = e.clientX;
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener('pointermove', (e) => {
-      if (e.target !== card && !card.contains(e.target)) return;
+      if (!isPointerDown || (e.target !== card && !card.contains(e.target))) return;
 
       const deltaX = e.clientX - lastX;
       const deltaY = e.clientY - lastY;
@@ -67,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener('pointerup', () => {
+      isPointerDown = false;
       if (!isClickOnly) {
         // Animate throw
         let x = 0;
