@@ -1,0 +1,61 @@
+title: TCF Journey
+description: Learning French in public — tracking TCF preparation with drills, vocabulary, and study notes.
+author: echo
+url: https://tcf-journey.github.io
+baseurl: /tcf-journey
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  tcf:
+    output: true
+    permalink: /drills/:slug
+  french:
+    output: true
+    permalink: /french/:slug
+  blog:
+    output: true
+    permalink: /posts/:slug
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "tcf"
+    values:
+      layout: "drill"
+  - scope:
+      path: ""
+      type: "french"
+    values:
+      layout: "card"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+
+# Theme configuration
+theme_config:
+  primary_color: "#6f62b8"
+  background_dark: "#161826"
+  background_light: "#eef0fa"
+  exam_date: "2026-11-14"
+  target_score: "400"
+
+exclude:
+  - Dockerfile
+  - docker-compose.yml
+  - .dockerignore
+  - support.js
+  - "*.dc.html"
+  - _ds/

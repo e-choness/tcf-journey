@@ -1,0 +1,48 @@
+@use '../variables' as *;
+
+.btn {
+  display: inline-block;
+  padding: $space-sm $space-lg;
+  border-radius: $radius-md;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: $font-heading;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: 12px 5px 13px 6px;
+  transform: rotate(-1.5deg);
+
+  &:hover {
+    background: var(--color-accent-400);
+    transform: rotate(-1.5deg) translateY(-2px);
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-divider);
+  border-radius: 6px 13px 5px 12px;
+
+  &:hover {
+    background: var(--color-hover-bg);
+    color: var(--color-text);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-accent);
+  border: none;
+
+  &:hover {
+    color: var(--color-accent-400);
+  }
+}

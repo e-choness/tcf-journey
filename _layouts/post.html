@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<article class="post-page">
+  <div class="post-container">
+    <a href="{{ '/blog' | relative_url }}" class="post-back">← Back to journal</a>
+
+    <div class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
+
+      <div class="post-meta">
+        <span class="post-date">{{ page.date | date: "%d %b %Y" }}</span>
+        <span class="post-reading-time" id="post-reading-time">— min read</span>
+      </div>
+    </div>
+
+    {% if page.description %}
+    <p class="post-lead">{{ page.description }}</p>
+    {% endif %}
+
+    {% if page.image %}
+    <div class="post-image" style="background-image: url('{{ page.image }}')"></div>
+    {% else %}
+    <div class="post-image wob"></div>
+    {% endif %}
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <div class="post-footer">
+      <button class="post-next-btn" id="next-post-btn">Next post →</button>
+    </div>
+  </div>
+</article>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const readingTimeEl = document.getElementById('post-reading-time');
+  const nextBtn = document.getElementById('next-post-btn');
+
+  // Calculate reading time
+  const content = document.querySelector('.post-content');
+  if (content) {
+    const text = content.innerText;
+    const wordsPerMinute = 200;
+    const words = text.split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    if (readingTimeEl) {
+      readingTimeEl.textContent = `${minutes} min read`;
+    }
+  }
+
+  // Next post button
+  nextBtn.addEventListener('click', function() {
+    fetch('{{ '/blog' | relative_url }}')
+      .then(r => r.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const posts = Array.from(doc.querySelectorAll('.post-preview'));
+        if (posts.length > 0) {
+          const randomPost = posts[Math.floor(Math.random() * posts.length)];
+          const link = randomPost.querySelector('a');
+          if (link) {
+            window.location.href = link.href;
+          }
+        }
+      })
+      .catch(() => {
+        alert('Could not load blog posts');
+      });
+  });
+});
+</script>

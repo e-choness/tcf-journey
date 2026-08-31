@@ -1,0 +1,56 @@
+<div class="blog-header">
+  <div class="blog-intro">
+    <div class="kicker">Journal</div>
+    <h1>Learning journey</h1>
+    <p>Longer posts: routines, mock-exam post-mortems, and the occasional detour.</p>
+  </div>
+</div>
+
+<div class="posts-list" id="posts-list">
+  {% for post in site.blog %}
+  <article class="post-preview" data-post-id="{{ post.url }}">
+    <div class="post-meta">
+      <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
+      <span class="meta-divider">·</span>
+      <span class="post-read" id="read-time-{{ forloop.index }}">— min</span>
+    </div>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <p class="post-summary">{{ post.summary }}</p>
+  </article>
+  {% endfor %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const posts = document.querySelectorAll('.post-preview');
+
+  posts.forEach((post, index) => {
+    const postUrl = post.dataset.postId;
+    const readTimeEl = document.getElementById(`read-time-${index + 1}`);
+
+    fetch(postUrl)
+      .then(r => r.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const content = doc.querySelector('.post-content');
+        if (content) {
+          const text = content.innerText;
+          const wordsPerMinute = 200;
+          const words = text.split(/\s+/).length;
+          const minutes = Math.ceil(words / wordsPerMinute);
+          if (readTimeEl) {
+            readTimeEl.textContent = `${minutes} min`;
+          }
+        }
+      })
+      .catch(() => {});
+  });
+});
+</script>
+
+{% if site.blog.size == 0 %}
+<div class="empty-state">
+  <p>No posts yet. Check back soon!</p>
+</div>
+{% endif %}

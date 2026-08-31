@@ -1,0 +1,32 @@
+# /tcf — drill library. Rings fill by drills DONE (localStorage per visitor).
+sections:
+  - { id: co, code: CO, en: Listening, fr: Compréhension orale }
+  - { id: ce, code: CE, en: Reading,   fr: Compréhension écrite }
+  - { id: eo, code: EO, en: Speaking,  fr: Expression orale }
+  - { id: ee, code: EE, en: Writing,   fr: Expression écrite }
+
+# Drills are grouped by tache, in this order.
+taches: ["Tâche 1", "Tâche 2", "Tâche 3"]
+
+# Facet rows above the list. Add or remove rows freely; each drill's
+# front matter supplies a value per key.
+facets:
+  - { key: section, en: Section, fr: Épreuve }
+  - { key: level,   en: Level,   fr: Niveau, values: [A1, A2, B1, B2, C1] }
+  - { key: topic,   en: Topic,   fr: Thème,
+      values: [Annonces, Conversation, Actualité, Administration, Méthode,
+               Présentation, Santé, Argumentation, Message, Lettre] }
+
+exam:
+  date: 2026-11-14
+  target: "B2 · 400"
+  study_hours: 182
+
+# Front matter a drill post needs:
+#   layout: drill
+#   section: co        # id from sections
+#   tache: "Tâche 1"
+#   level: A2
+#   topic: Annonces
+#   minutes: 8
+#   brief: "The prompt shown in the taped box."

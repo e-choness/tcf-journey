@@ -1,0 +1,159 @@
+@use '../variables' as *;
+
+// Post page
+.post-page {
+  width: 100%;
+}
+
+.post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $space-4xl $space-3xl;
+}
+
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: $space-3xl;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateX(-4px);
+  }
+}
+
+.post-header {
+  margin-bottom: $space-3xl;
+}
+
+.post-title {
+  font-size: 46px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 $space-lg;
+}
+
+.post-meta {
+  display: flex;
+  gap: $space-lg;
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.post-lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-bright);
+  margin: 0 0 $space-3xl;
+  max-width: 700px;
+}
+
+.post-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(140deg, var(--color-surface), color-mix(in srgb, var(--color-accent) 15%, var(--color-surface)));
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-md);
+  margin-bottom: $space-4xl;
+  background-size: cover;
+  background-position: center;
+}
+
+.post-content {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-text-content);
+  margin-bottom: $space-4xl;
+
+  h2 {
+    font-size: 28px;
+    margin: $space-3xl 0 $space-lg;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: $space-2xl 0 $space-md;
+  }
+
+  p {
+    margin-bottom: $space-lg;
+  }
+
+  ul, ol {
+    margin: $space-lg 0 $space-lg $space-2xl;
+
+    li {
+      margin-bottom: $space-sm;
+    }
+  }
+
+  code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 13px;
+  }
+
+  pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: $space-lg;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    margin: $space-lg 0;
+
+    code {
+      background: none;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: $space-lg;
+    margin: $space-2xl 0;
+    color: var(--color-text-muted);
+  }
+}
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: $space-2xl;
+  border-top: 1px solid var(--color-divider);
+}
+
+.post-next-btn {
+  padding: $space-md $space-2xl;
+  border: 1px solid var(--color-divider);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: $radius-md;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--color-hover-bg);
+    border-color: var(--color-accent);
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-lg) {
+  .post-container {
+    padding: $space-2xl $space-lg;
+  }
+
+  .post-title {
+    font-size: 32px;
+  }
+
+  .post-lead {
+    font-size: 16px;
+  }
+}

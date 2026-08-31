@@ -1,0 +1,10 @@
+resources:
+  - title: "TCF Official Site"
+    url: "https://www.selt.gouv.fr"
+    description: "Official TCF exam information and registration"
+  - title: "TV5Monde"
+    url: "https://www.tv5monde.com"
+    description: "French language videos and learning resources"
+  - title: "France Éducation"
+    url: "https://www.france-education-international.fr"
+    description: "French language education and certification"

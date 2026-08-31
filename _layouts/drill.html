@@ -1,0 +1,113 @@
+---
+layout: default
+---
+
+<article class="drill-page">
+  <div class="drill-container">
+    <a href="{{ '/tcf' | relative_url }}" class="drill-back">← Back to drills</a>
+
+    <div class="drill-header">
+      <div class="drill-tags-row">
+        <span class="tag tag-section">{{ page.section | upcase }}</span>
+        <span class="tag tag-neutral">{{ page.tache }}</span>
+        <span class="tag tag-neutral">{{ page.level }}</span>
+        <span class="tag tag-neutral">{{ page.topic }}</span>
+      </div>
+
+      <h1 class="drill-title">{{ page.title }}</h1>
+
+      <div class="drill-meta">
+        <span class="drill-date">{{ page.date | date: "%d %b %Y" }}</span>
+        <span class="drill-reading-time" id="drill-reading-time">— min read</span>
+      </div>
+    </div>
+
+    {% if page.brief %}
+    <div class="drill-brief">
+      <div class="tape hand" style="top:-10px;left:20px;transform:rotate(-2deg)"></div>
+      <div class="brief-label hand">Brief</div>
+      <div class="brief-content wob2">
+        {{ page.brief }}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="drill-content">
+      {{ content }}
+    </div>
+
+    <div class="drill-footer">
+      <button class="drill-done-btn-large" data-drill-id="{{ page.url }}" id="drill-done-btn">
+        <span class="done-text">Mark as done</span>
+        <span class="done-check" style="display:none">✓ Done</span>
+      </button>
+      <button class="drill-next-btn" id="next-drill-btn">Next drill →</button>
+    </div>
+  </div>
+</article>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const drillId = '{{ page.url }}';
+  const doneBtn = document.getElementById('drill-done-btn');
+  const nextBtn = document.getElementById('next-drill-btn');
+  const readingTimeEl = document.getElementById('drill-reading-time');
+
+  // Calculate reading time
+  const content = document.querySelector('.drill-content');
+  if (content) {
+    const text = content.innerText;
+    const wordsPerMinute = 200;
+    const words = text.split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    if (readingTimeEl) {
+      readingTimeEl.textContent = `${minutes} min read`;
+    }
+  }
+
+  // Restore done state
+  const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
+  if (progress[drillId]) {
+    doneBtn.classList.add('done');
+    doneBtn.querySelector('.done-text').style.display = 'none';
+    doneBtn.querySelector('.done-check').style.display = 'inline';
+  }
+
+  // Done button handler
+  doneBtn.addEventListener('click', function() {
+    const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
+    progress[drillId] = !progress[drillId];
+    localStorage.setItem('tcf-journey-progress', JSON.stringify(progress));
+
+    this.classList.toggle('done');
+    if (progress[drillId]) {
+      this.querySelector('.done-text').style.display = 'none';
+      this.querySelector('.done-check').style.display = 'inline';
+    } else {
+      this.querySelector('.done-text').style.display = 'inline';
+      this.querySelector('.done-check').style.display = 'none';
+    }
+  });
+
+  // Next drill button
+  nextBtn.addEventListener('click', function() {
+    fetch('{{ '/tcf' | relative_url }}')
+      .then(r => r.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const drills = Array.from(doc.querySelectorAll('.drill-item'));
+        if (drills.length > 0) {
+          const randomDrill = drills[Math.floor(Math.random() * drills.length)];
+          const link = randomDrill.querySelector('.drill-link');
+          if (link) {
+            window.location.href = link.href;
+          }
+        }
+      })
+      .catch(() => {
+        alert('Could not load drill list');
+      });
+  });
+});
+</script>

@@ -1,0 +1,107 @@
+@use '../variables' as *;
+
+// About page
+.about-content {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: $space-4xl $space-3xl $space-4xl;
+}
+
+.about-content .kicker {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: $space-lg;
+}
+
+.about-content h1 {
+  font-size: 52px;
+  letter-spacing: -0.03em;
+  margin: 0 0 $space-2xl;
+}
+
+.about-content p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text-accent);
+  max-width: 600px;
+  text-wrap: pretty;
+  margin-bottom: $space-xl;
+}
+
+.about-table {
+  margin-top: $space-2xl;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  tr {
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  td {
+    padding: $space-lg 0;
+    font-size: 14px;
+  }
+
+  .label {
+    color: var(--color-text-dimmer);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 150px;
+  }
+}
+
+.resources-section {
+  margin-top: $space-4xl;
+  padding-top: $space-4xl;
+  border-top: 1px solid var(--color-divider);
+
+  h2 {
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin-bottom: $space-2xl;
+  }
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $space-2xl;
+  margin-top: $space-2xl;
+}
+
+.resource-card {
+  display: block;
+  padding: $space-2xl;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-divider);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 $space-sm;
+    color: var(--color-text);
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+}

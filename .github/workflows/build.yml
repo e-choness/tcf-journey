@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2
+        bundler-cache: true
+
+    - name: Build Jekyll site
+      run: bundle exec jekyll build
+
+    - name: Test Jekyll build
+      run: |
+        if [ -d "_site" ]; then
+          echo "Jekyll build successful"
+        else
+          echo "Jekyll build failed"
+          exit 1
+        fi

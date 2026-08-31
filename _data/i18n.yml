@@ -1,0 +1,22 @@
+# UI copy only — drills and posts are never translated.
+# Default language: browser locale, then remembered in localStorage.
+en:
+  nav: { home: Home, tcf: TCF, french: French, blog: Blog, about: About }
+  search_placeholder: "Search drills, topics, tâches…"
+  clear: Reset
+  no_results: "No drill matches those filters."
+  mark_done: "Mark as done"
+  marked_done: "Done"
+  next_drill: "Next drill"
+  card_hint: "Click a card to flip · drag it to throw it around"
+  prompt: "The prompt"
+fr:
+  nav: { home: Accueil, tcf: TCF, french: Français, blog: Blog, about: "À propos" }
+  search_placeholder: "Chercher un exercice, un thème, une tâche…"
+  clear: Réinitialiser
+  no_results: "Aucun exercice pour ces filtres."
+  mark_done: "Marquer comme fait"
+  marked_done: "Fait"
+  next_drill: "Exercice suivant"
+  card_hint: "Cliquez pour retourner · faites glisser pour la lancer"
+  prompt: "La consigne"
