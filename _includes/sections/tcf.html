@@ -1,15 +1,30 @@
 <div class="tcf-header">
   <div class="tcf-intro">
     <div class="kicker">Drill library</div>
-    <h1>Drills by tâche <span class="done-badge hand" id="drills-done-badge" style="display:none">0 done</span></h1>
-    <p>Tick them off as you go. Progress is per tâche, and it's remembered between visits.</p>
-    <div class="section-rings" id="section-rings">
-      <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMid meet" style="display:block;width:100%;max-width:280px;height:80px">
-        <circle class="ring" data-section="co" cx="20" cy="40" r="18" />
-        <circle class="ring" data-section="ce" cx="80" cy="40" r="18" />
-        <circle class="ring" data-section="eo" cx="140" cy="40" r="18" />
-        <circle class="ring" data-section="ee" cx="200" cy="40" r="18" />
-      </svg>
+    <h1>Drills by tâche</h1>
+    <p>Tick them off as you go. Progress is per section, and it's remembered between visits.</p>
+  </div>
+
+  <div class="skill-cards">
+    <div class="skill-card" data-section="co">
+      <div class="skill-code">CO</div>
+      <div class="skill-name">Listening</div>
+      <div class="skill-progress" id="co-progress">0/3</div>
+    </div>
+    <div class="skill-card" data-section="ce">
+      <div class="skill-code">CE</div>
+      <div class="skill-name">Reading</div>
+      <div class="skill-progress" id="ce-progress">0/0</div>
+    </div>
+    <div class="skill-card" data-section="eo">
+      <div class="skill-code">EO</div>
+      <div class="skill-name">Speaking</div>
+      <div class="skill-progress" id="eo-progress">0/0</div>
+    </div>
+    <div class="skill-card" data-section="ee">
+      <div class="skill-code">EE</div>
+      <div class="skill-name">Writing</div>
+      <div class="skill-progress" id="ee-progress">0/0</div>
     </div>
   </div>
 </div>
@@ -23,26 +38,23 @@
 </div>
 
 <div class="tcf-filters">
+  {% for facet in site.data.tcf.facets %}
   <div class="filter-group">
-    <span class="filter-label">Section</span>
-    <div class="filter-tags" id="section-filters">
-      <button class="tag" data-filter="section" data-value="">All</button>
-      <button class="tag" data-filter="section" data-value="co">CO</button>
-      <button class="tag" data-filter="section" data-value="ce">CE</button>
-      <button class="tag" data-filter="section" data-value="eo">EO</button>
-      <button class="tag" data-filter="section" data-value="ee">EE</button>
+    <span class="filter-label">{{ facet.en }}</span>
+    <div class="filter-tags" id="{{ facet.key }}-filters">
+      <button class="tag" data-filter="{{ facet.key }}" data-value="">All</button>
+      {% if facet.key == "section" %}
+        {% for section in site.data.tcf.sections %}
+        <button class="tag" data-filter="section" data-value="{{ section.id }}">{{ section.code }}</button>
+        {% endfor %}
+      {% else %}
+        {% for value in facet.values %}
+        <button class="tag" data-filter="{{ facet.key }}" data-value="{{ value }}">{{ value }}</button>
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
-  <div class="filter-group">
-    <span class="filter-label">Level</span>
-    <div class="filter-tags" id="level-filters">
-      <button class="tag" data-filter="level" data-value="">All</button>
-      <button class="tag" data-filter="level" data-value="A2">A2</button>
-      <button class="tag" data-filter="level" data-value="B1">B1</button>
-      <button class="tag" data-filter="level" data-value="B2">B2</button>
-      <button class="tag" data-filter="level" data-value="C1">C1</button>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 <div class="drills-list" id="drills-list">
@@ -147,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.borderColor = 'var(--color-divider)';
       }
       updateDoneBadge();
-      updateProgressRings();
+      updateProgressDisplays();
       updateTacheProgress();
     });
   });
@@ -167,8 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Update progress rings
-  function updateProgressRings() {
+  // Update progress displays (skill cards)
+  function updateProgressDisplays() {
     const progress = JSON.parse(localStorage.getItem('tcf-journey-progress') || '{}');
     const sections = ['co', 'ce', 'eo', 'ee'];
 
@@ -179,24 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .filter(item => progress[item.dataset.id])
         .length;
 
-      const ring = document.querySelector(`[data-section="${section}"]`);
-      if (ring) {
-        const percent = total > 0 ? (done / total) * 100 : 0;
-        const circumference = 2 * Math.PI * 18;
-        const offset = circumference * (1 - percent / 100);
-
-        ring.style.strokeDasharray = circumference;
-        ring.style.strokeDashoffset = offset;
-
-        if (percent > 0 && percent < 100) {
-          ring.classList.remove('active');
-          ring.style.stroke = 'var(--color-accent)';
-        } else if (percent === 100) {
-          ring.classList.add('active');
-          ring.style.stroke = 'var(--color-accent)';
-        } else {
-          ring.classList.remove('active');
-        }
+      const progressEl = document.getElementById(`${section}-progress`);
+      if (progressEl) {
+        progressEl.textContent = `${done}/${total}`;
       }
     });
   }
@@ -235,9 +232,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Ring click handling
-  rings.forEach(ring => {
-    ring.addEventListener('click', function() {
+  // Skill card click handling
+  document.querySelectorAll('.skill-card').forEach(card => {
+    card.addEventListener('click', function() {
       const section = this.dataset.section;
       if (activeFilters.section === section) {
         delete activeFilters.section;
@@ -268,6 +265,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (activeFilters.level && item.dataset.level !== activeFilters.level) {
         show = false;
       }
+      if (activeFilters.topic && item.dataset.topic !== activeFilters.topic) {
+        show = false;
+      }
 
       if (query && !item.textContent.toLowerCase().includes(query)) {
         show = false;
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initial state
   updateDoneBadge();
-  updateProgressRings();
+  updateProgressDisplays();
   updateTacheProgress();
 });
 </script>
