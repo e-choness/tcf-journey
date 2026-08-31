@@ -2,9 +2,10 @@
 $color-bg: #161826;
 $color-surface: #1f212d;
 $color-text: #e9e9ed;
-$color-accent: #6f62b8;
-$color-accent-400: #8c85d0;
-$color-accent-600: #5a5499;
+$color-accent: #9184d9;
+$color-accent-200: #d2cefd;
+$color-accent-400: #b5abfc;
+$color-accent-600: #796cbf;
 $color-divider: rgba(233, 233, 237, 0.1);
 $color-section: #1a1c27;
 
@@ -18,7 +19,7 @@ $color-section-light: #f0f2fc;
 // Typography
 $font-heading: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
 $font-hand: "Patrick Hand", cursive;
-$font-body: system-ui, -apple-system, sans-serif;
+$font-body: "Inter", system-ui, -apple-system, sans-serif;
 
 // Spacing
 $space-xs: 4px;
