@@ -1,3 +1,11 @@
+description: "I'm working towards a B2 on the TCF. This site keeps the preparation visible: which drills I've done, the words I keep forgetting, and honest write-ups of what worked."
+
+goal: "TCF Canada — B2 (400+ per section)"
+exam_date: "14 November 2026"
+
+languages: "EN / FR interface · content untranslated"
+tech_stack: "Jekyll · Nocturne theme · GitHub Pages"
+
 resources:
   - title: "TCF Official Site"
     url: "https://www.selt.gouv.fr"

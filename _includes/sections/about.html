@@ -2,7 +2,7 @@
   <div class="kicker">About</div>
   <h1>About this site</h1>
 
-  <p>I'm working towards a B2 on the TCF. This site keeps the preparation visible: which drills I've done, the words I keep forgetting, and honest write-ups of what worked.</p>
+  <p>{{ site.data.about.description }}</p>
 
   <p>The interface switches between English and French. Posts and drills stay in whichever language they were written in — usually French for practice, English for reflection.</p>
 
@@ -10,19 +10,19 @@
     <table>
       <tr>
         <td class="label">Goal</td>
-        <td>TCF Canada — B2 (400+ per section)</td>
+        <td>{{ site.data.about.goal }}</td>
       </tr>
       <tr>
         <td class="label">Exam</td>
-        <td>14 November 2026</td>
+        <td>{{ site.data.about.exam_date }}</td>
       </tr>
       <tr>
         <td class="label">Languages</td>
-        <td>EN / FR interface · content untranslated</td>
+        <td>{{ site.data.about.languages }}</td>
       </tr>
       <tr>
         <td class="label">Built with</td>
-        <td>Jekyll · Nocturne theme · GitHub Pages</td>
+        <td>{{ site.data.about.tech_stack }}</td>
       </tr>
     </table>
   </div>
