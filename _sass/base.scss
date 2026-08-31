@@ -49,7 +49,6 @@ a {
 .paper {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
   background-color: var(--color-bg);
   background-image:
     linear-gradient(to right, transparent 0 27px, color-mix(in srgb, var(--color-accent) 38%, transparent) 27px 28px, transparent 28px),

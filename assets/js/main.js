@@ -58,64 +58,75 @@ document.addEventListener('progresschange', (e) => {
   updateProgressDisplay();
 });
 
-function nextDrill() {
-  const drills = Array.from(document.querySelectorAll('.drill-item'));
-  if (drills.length > 1) {
-    const randomDrill = drills[Math.floor(Math.random() * drills.length)];
-    randomDrill.querySelector('.drill-link').click();
-  }
-}
+// Cursor spotlight effect and data-reveal observer (§3.7, §7.5)
+let spotlightObserver;
 
-function nextPost() {
-  const posts = Array.from(document.querySelectorAll('.post-preview'));
-  if (posts.length > 1) {
-    const randomPost = posts[Math.floor(Math.random() * posts.length)];
-    randomPost.querySelector('a').click();
-  }
-}
-
-// Cursor spotlight effect
-window.addEventListener('pointermove', (e) => {
+function initSpotlightAndReveal() {
   const spotlight = document.getElementById('spotlight');
-  if (spotlight) {
-    spotlight.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
+
+  // Single pointermove handler for both spotlight and cube
+  window.addEventListener('pointermove', (e) => {
+    if (spotlight) {
+      spotlight.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
+    }
+  });
+
+  // Initialize data-reveal observer
+  if (!spotlightObserver) {
+    spotlightObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            spotlightObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '-40px 0px -10% 0px' }
+    );
   }
-});
 
-// Intersection Observer for data-reveal animations
-window.addEventListener('load', () => {
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: '-40px 0px -10% 0px' }
-  );
+  document.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => {
+    spotlightObserver.observe(el);
+  });
+}
 
-  document.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => io.observe(el));
-});
+// Run on load and on pageshow (for bfcache restoration)
+window.addEventListener('load', initSpotlightAndReveal);
+window.addEventListener('pageshow', initSpotlightAndReveal);
 
-// 3D Cube interaction
+// 3D Cube interaction (§7.4 – gated RAF loop)
 (() => {
   const cubeRef = document.querySelector('[data-cube]');
   if (!cubeRef) return;
 
   let rotation = { x: -14, y: 22, vy: 0.14, drag: false, lastX: 0, lastY: 0 };
+  let rafId = null;
+  let isVisible = true;
 
   const tick = () => {
-    if (!rotation.drag) {
+    if (isVisible && !rotation.drag) {
       rotation.y += rotation.vy;
     }
     const inner = cubeRef.querySelector('[data-cube-inner]');
     if (inner) {
       inner.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
     }
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
   };
+
+  // Gate: only run tick while visible
+  const visibilityHandler = () => {
+    isVisible = document.visibilityState === 'visible';
+  };
+  document.addEventListener('visibilitychange', visibilityHandler);
+
+  // Gate: only run tick while in viewport
+  const cubeObserver = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+  });
+  cubeObserver.observe(cubeRef);
+
   tick();
 
   cubeRef.addEventListener('pointerdown', (e) => {
