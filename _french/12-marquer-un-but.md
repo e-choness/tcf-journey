@@ -1,4 +1,3 @@
-
 ---
 layout: card
 term: marquer un but
