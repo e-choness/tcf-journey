@@ -27,7 +27,7 @@
 
 
 {% if site.blog.size == 0 %}
-<div class="empty-state">
-  <p>No posts yet. Check back soon!</p>
-</div>
+<div class="empty-state"
+     data-i18n-en="{{ site.data.i18n.en.blog.empty }}"
+     data-i18n-fr="{{ site.data.i18n.fr.blog.empty }}">{{ site.data.i18n.en.blog.empty }}</div>
 {% endif %}

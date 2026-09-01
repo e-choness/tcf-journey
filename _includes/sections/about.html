@@ -1,27 +1,37 @@
 <div class="about-content">
-  <div class="kicker">About</div>
-  <h1>About this site</h1>
+  <div class="kicker"
+       data-i18n-en="{{ site.data.i18n.en.about.kicker }}"
+       data-i18n-fr="{{ site.data.i18n.fr.about.kicker }}">{{ site.data.i18n.en.about.kicker }}</div>
+  <h1 data-i18n-en="{{ site.data.i18n.en.about.title }}"
+      data-i18n-fr="{{ site.data.i18n.fr.about.title }}">{{ site.data.i18n.en.about.title }}</h1>
 
   <p>{{ site.data.about.description }}</p>
-
-  <p>The interface switches between English and French. Posts and drills stay in whichever language they were written in — usually French for practice, English for reflection.</p>
 
   <div class="about-table">
     <table>
       <tr>
-        <td class="label">Goal</td>
+        <td class="label"
+            data-i18n-en="{{ site.data.i18n.en.about.row_goal }}"
+            data-i18n-fr="{{ site.data.i18n.fr.about.row_goal }}">{{ site.data.i18n.en.about.row_goal }}</td>
         <td>{{ site.data.tcf.exam.goal }}</td>
       </tr>
       <tr>
-        <td class="label">Exam</td>
+        <td class="label"
+            data-i18n-en="{{ site.data.i18n.en.about.row_exam }}"
+            data-i18n-fr="{{ site.data.i18n.fr.about.row_exam }}">{{ site.data.i18n.en.about.row_exam }}</td>
         <td>{{ site.data.tcf.exam.date }}</td>
       </tr>
       <tr>
-        <td class="label">Languages</td>
-        <td>{{ site.data.about.languages }}</td>
+        <td class="label"
+            data-i18n-en="{{ site.data.i18n.en.about.row_langs }}"
+            data-i18n-fr="{{ site.data.i18n.fr.about.row_langs }}">{{ site.data.i18n.en.about.row_langs }}</td>
+        <td data-i18n-en="{{ site.data.i18n.en.about.langs_value }}"
+            data-i18n-fr="{{ site.data.i18n.fr.about.langs_value }}">{{ site.data.i18n.en.about.langs_value }}</td>
       </tr>
       <tr>
-        <td class="label">Built with</td>
+        <td class="label"
+            data-i18n-en="{{ site.data.i18n.en.about.row_site }}"
+            data-i18n-fr="{{ site.data.i18n.fr.about.row_site }}">{{ site.data.i18n.en.about.row_site }}</td>
         <td>{{ site.data.about.tech_stack }}</td>
       </tr>
     </table>

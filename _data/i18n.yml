@@ -55,6 +55,7 @@ en:
     body: "Longer posts: routines, mock-exam post-mortems, and the occasional detour."
     next: "Next post"
     prev: "Previous post"
+    empty: "No posts yet. Check back soon!"
 
   drill:
     prompt: "The prompt"
@@ -129,6 +130,7 @@ fr:
     body: "Des articles plus longs : routines, bilans d'examens blancs, et quelques détours."
     next: "Article suivant"
     prev: "Article précédent"
+    empty: "Aucun article pour l'instant. Revenez bientôt !"
 
   drill:
     prompt: "La consigne"
