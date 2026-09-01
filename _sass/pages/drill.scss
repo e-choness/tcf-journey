@@ -159,7 +159,7 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.28s cubic-bezier(0.2, 1.5, 0.4, 1), background 0.2s, color 0.2s, border-color 0.2s;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -168,6 +168,10 @@
   &:hover {
     color: var(--color-text);
     border-color: var(--color-accent);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
@@ -181,8 +185,15 @@
   }
 
   &.done {
+    background: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-accent);
+    color: var(--color-bg);
+
+    &:hover {
+      color: var(--color-bg);
+      border-color: var(--color-accent-400);
+      background: var(--color-accent-400);
+    }
   }
 }
 

@@ -41,13 +41,17 @@ layout: default
       <button class="drill-done-btn-large" data-drill-id="{{ page.url | relative_url }}" id="drill-done-btn" aria-pressed="false"
               data-i18n-en="{{ site.data.i18n.en.drill.mark_done }}" data-i18n-fr="{{ site.data.i18n.fr.drill.mark_done }}"
               data-i18n-marked-en="{{ site.data.i18n.en.drill.marked_done }}" data-i18n-marked-fr="{{ site.data.i18n.fr.drill.marked_done }}">
-        <span class="done-text">{{ site.data.i18n.en.drill.mark_done }}</span>
-        <span class="done-check">✓ {{ site.data.i18n.en.drill.marked_done }}</span>
+        <span class="done-text" data-i18n-en="{{ site.data.i18n.en.drill.mark_done }}" data-i18n-fr="{{ site.data.i18n.fr.drill.mark_done }}">{{ site.data.i18n.en.drill.mark_done }}</span>
+        <span class="done-check">✓ <span data-i18n-en="{{ site.data.i18n.en.drill.marked_done }}" data-i18n-fr="{{ site.data.i18n.fr.drill.marked_done }}">{{ site.data.i18n.en.drill.marked_done }}</span></span>
       </button>
-      <button class="drill-next-btn" id="next-drill-btn"
-              data-i18n-en="{{ site.data.i18n.en.drill.next }}" data-i18n-fr="{{ site.data.i18n.fr.drill.next }}">{{ site.data.i18n.en.drill.next }} →</button>
+      <button class="drill-next-btn" id="next-drill-btn"><span data-i18n-en="{{ site.data.i18n.en.drill.next }}" data-i18n-fr="{{ site.data.i18n.fr.drill.next }}">{{ site.data.i18n.en.drill.next }}</span> →</button>
     </div>
   </div>
 </article>
+
+{%- assign ordered = site.tcf | sort: "date" -%}
+<script type="application/json" id="drill-order">
+[{% for d in ordered %}{{ d.url | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+</script>
 
 <div class="drill-data" data-drill-id="{{ page.url | relative_url }}" data-tcf-url="{{ '/tcf/' | relative_url }}"></div>

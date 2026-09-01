@@ -80,27 +80,21 @@
   gap: $space-sm;
 }
 
-.lang-toggle,
-.theme-toggle,
-.menu-toggle {
-  background: transparent;
-  border: 1px solid var(--color-divider);
-  color: var(--color-text);
-  cursor: pointer;
-  font-size: 14px;
-  padding: $space-sm $space-xs;
-  border-radius: $radius-md;
-  transition: all 0.2s;
-}
-
 .lang-toggle {
   display: inline-flex;
+  align-items: center;
   overflow: hidden;
+  border: 1px solid var(--color-divider);
+  border-radius: $radius-md;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: $font-heading;
 
   span {
-    padding: $space-sm $space-md;
+    padding: 6px 9px;
     font-size: 12px;
-    color: var(--color-text-light);
+    color: color-mix(in srgb, var(--color-text) 50%, transparent);
   }
 }
 
@@ -112,7 +106,20 @@ html[data-lang="fr"] .lang-toggle .lang-fr {
 
 .theme-toggle,
 .menu-toggle {
-  padding: $space-sm $space-xs;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-divider);
+  border-radius: $radius-md;
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
 
   &:hover {
     background: var(--color-hover-bg);
@@ -123,7 +130,7 @@ html[data-lang="fr"] .lang-toggle .lang-fr {
   display: none;
   flex-direction: column;
   gap: 2px;
-  padding: $space-sm $space-xl $space-lg;
+  padding: $space-xs $space-xl $space-sm;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-divider);
 
@@ -131,12 +138,11 @@ html[data-lang="fr"] .lang-toggle .lang-fr {
     display: flex;
     align-items: baseline;
     gap: $space-md;
-    padding: $space-lg $space-sm;
+    padding: $space-sm $space-sm;
     text-decoration: none;
     color: inherit;
     font-family: $font-heading;
-    font-size: 34px;
-    letter-spacing: -.03em;
+    font-size: 18px;
     border-bottom: 1px solid var(--color-divider);
 
     &.active {
@@ -156,7 +162,7 @@ html[data-lang="fr"] .lang-toggle .lang-fr {
 
 .mobile-nav-foot {
   font-family: $font-hand;
-  padding: $space-lg $space-sm;
+  padding: $space-sm $space-sm;
   color: var(--color-text-light);
 }
 

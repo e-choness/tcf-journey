@@ -38,19 +38,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Update done badge with count (§5.2)
   function updateDoneBadge() {
-    const count = window.Progress.count();
     const badge = document.getElementById('drills-done-badge');
     if (!badge) return;
 
-    const lang = document.documentElement.getAttribute('data-lang') || 'en';
-    const badgeSuffix = lang === 'fr' ? badge.dataset.badgeFr : badge.dataset.badgeEn;
+    const total = drillItems.length;
+    const done = drillItems.filter(i => window.Progress.isDone(i.dataset.id)).length;
 
-    if (count > 0) {
-      badge.textContent = `${count} ${badgeSuffix || 'done'}`;
-      badge.style.display = 'inline-block';
-    } else {
-      badge.style.display = 'none';
-    }
+    const lang = document.documentElement.getAttribute('data-lang') || 'en';
+    const badgeSuffix = (lang === 'fr' ? badge.dataset.badgeFr : badge.dataset.badgeEn) || 'done!';
+
+    badge.textContent = `${done} / ${total} ${badgeSuffix}`;
+    badge.style.display = 'inline-block';
   }
 
   // Update progress displays (skill cards and home cube)

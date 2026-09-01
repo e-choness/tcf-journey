@@ -13,8 +13,11 @@ $color-section: #1a1c27;
 $color-bg-light: #eef0fa;
 $color-surface-light: #f8f9fe;
 $color-text-light: #292b31;
+$color-accent-light: #6f62b8;
+$color-accent-400-light: #8c85d0;
 $color-divider-light: color-mix(in srgb, #292b31 14%, transparent);
 $color-section-light: #f0f2fc;
+$color-section-kicker-light: color-mix(in srgb, #6f62b8 72%, transparent);
 
 // Typography
 $font-heading: "Bricolage Grotesque", "Inter", system-ui, sans-serif;

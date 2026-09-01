@@ -9,14 +9,22 @@
   font-size: 12px;
   background: transparent;
   color: var(--color-text-muted);
-  cursor: pointer;
   transition: all 0.2s;
 }
 
+button.tag {
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: var(--color-text);
+  }
+}
+
 .tag.active {
-  background: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
   border-color: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .tag-outline {
@@ -37,7 +45,3 @@
   color: var(--color-text-muted);
 }
 
-.tag:hover {
-  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
-  color: var(--color-text);
-}

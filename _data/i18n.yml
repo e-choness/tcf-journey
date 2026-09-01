@@ -54,6 +54,7 @@ en:
     title: "Learning journey"
     body: "Longer posts: routines, mock-exam post-mortems, and the occasional detour."
     next: "Next post"
+    prev: "Previous post"
 
   drill:
     prompt: "The prompt"
@@ -127,6 +128,7 @@ fr:
     title: "Parcours d'apprentissage"
     body: "Des articles plus longs : routines, bilans d'examens blancs, et quelques détours."
     next: "Article suivant"
+    prev: "Article précédent"
 
   drill:
     prompt: "La consigne"

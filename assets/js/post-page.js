@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   const readingTimeEl = document.getElementById('post-reading-time');
   const nextBtn = document.getElementById('next-post-btn');
-  const blogUrl = document.querySelector('[data-blog-url]')?.dataset.blogUrl || '/blog/';
 
   // Calculate reading time
   const content = document.querySelector('.post-content');
@@ -16,26 +15,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Next post button
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
-      fetch(blogUrl)
-        .then(r => r.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const posts = Array.from(doc.querySelectorAll('.post-preview'));
-          if (posts.length > 0) {
-            const randomPost = posts[Math.floor(Math.random() * posts.length)];
-            const link = randomPost.querySelector('a');
-            if (link) {
-              window.location.href = link.href;
-            }
-          }
-        })
-        .catch(() => {
-          alert('Could not load blog posts');
-        });
-    });
+  // Sequential prev/next post navigation with greyed-out endpoints
+  const prevBtn = document.getElementById('prev-post-btn');
+  const here = document.querySelector('[data-post-here]')?.dataset.postHere || location.pathname;
+
+  let order = [];
+  try {
+    order = JSON.parse(document.getElementById('post-order').textContent);
+  } catch (e) {}
+
+  const i = order.indexOf(here);
+  const prevUrl = i > 0 ? order[i - 1] : null;
+  const nextUrl = i >= 0 && i < order.length - 1 ? order[i + 1] : null;
+
+  function wire(btn, url) {
+    if (!btn) return;
+    if (url) {
+      btn.setAttribute('href', url);
+      btn.removeAttribute('aria-disabled');
+      btn.classList.remove('is-disabled');
+    } else {
+      btn.removeAttribute('href');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.classList.add('is-disabled');
+    }
   }
+
+  wire(prevBtn, prevUrl);
+  wire(nextBtn, nextUrl);
 });

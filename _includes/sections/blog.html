@@ -8,21 +8,20 @@
 
 <div class="posts-list" id="posts-list">
   {% for post in site.blog %}
-  <article class="post-preview rowlink" data-post-id="{{ post.url | relative_url }}">
-    <div class="post-number d-only">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</div>
-    <a href="{{ post.url | relative_url }}">
-      <div class="post-meta">
+  <a class="post-preview rowlink" data-reveal href="{{ post.url | relative_url }}" data-post-id="{{ post.url | relative_url }}">
+    <span class="post-body">
+      <span class="post-meta">
         <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
         <span class="meta-divider">·</span>
         {%- assign words = post.content | number_of_words -%}
         {%- assign mins = words | divided_by: 200.0 | ceil -%}
         <span class="post-read">{{ post.minutes | default: mins }} min</span>
-      </div>
-      {% include post-image.html p=post class="post-thumb" %}
-      <h2 data-i18n-en="{{ post.title | escape }}" data-i18n-fr="{{ post.title_fr | default: post.title | escape }}">{{ post.title }}</h2>
-      <p class="post-summary">{{ post.summary }}</p>{%- comment -%} content, never translated {%- endcomment -%}
-    </a>
-  </article>
+      </span>
+      <span class="post-title" data-i18n-en="{{ post.title | escape }}" data-i18n-fr="{{ post.title_fr | default: post.title | escape }}">{{ post.title }}</span>
+      <span class="post-summary">{{ post.summary }}</span>{%- comment -%} content, never translated {%- endcomment -%}
+    </span>
+    <span class="post-number d-only" aria-hidden="true">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
+  </a>
   {% endfor %}
 </div>
 

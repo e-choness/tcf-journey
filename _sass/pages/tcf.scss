@@ -4,7 +4,7 @@
 .tcf-header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: $space-5xl $space-3xl $space-4xl;
+  padding: $space-4xl $space-3xl;
 }
 
 .tcf-intro .kicker {
@@ -39,8 +39,8 @@
 .skill-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: $space-lg;
-  margin-bottom: $space-4xl;
+  gap: 14px;
+  margin-bottom: 34px;
 }
 
 .skill-card {
@@ -152,7 +152,7 @@
   padding: 0 $space-3xl;
   display: flex;
   gap: $space-lg;
-  margin-bottom: $space-3xl;
+  margin-bottom: $space-lg;
   flex-wrap: wrap;
   align-items: center;
 
@@ -172,9 +172,9 @@
 }
 
 .search-input {
-  flex: 1;
-  min-width: 280px;
-  padding: $space-lg $space-2xl;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 $space-lg 0 34px;
   background: var(--color-surface);
   border: 1px solid var(--color-divider);
   border-radius: $radius-md;
@@ -193,7 +193,7 @@
   display: flex;
   flex-direction: column;
   gap: $space-2xl;
-  margin-bottom: $space-4xl;
+  margin-bottom: 30px;
 }
 
 .filter-group {
@@ -225,19 +225,10 @@
   padding: 0 $space-3xl $space-5xl;
   display: flex;
   flex-direction: column;
-  gap: $space-5xl;
+  gap: 36px;
 }
 
 .tache-section {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
-
-  &.in {
-    opacity: 1;
-    transform: none;
-  }
-
   // Header row: tache name + progress label
   > div:first-child {
     display: flex;
@@ -279,7 +270,7 @@
   grid-template-columns: 34px 44px 1fr auto;
   gap: $space-lg;
   align-items: start;
-  padding: $space-lg $space-sm;
+  padding: 15px 6px;
   border-bottom: 1px solid var(--color-divider);
   transition: background 0.18s, padding-left 0.18s;
 

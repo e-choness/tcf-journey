@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const movementX = Math.abs(e.clientX - startX);
       const movementY = Math.abs(e.clientY - startY);
 
-      if (movementX > 5 || movementY > 5) {
+      if (movementX > 10 || movementY > 10) {
         isClickOnly = false;
         card.style.transform = `translate(${e.clientX - startX}px, ${e.clientY - startY}px) rotate(${(e.clientX - startX) * 0.02}deg)`;
       }
