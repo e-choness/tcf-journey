@@ -4,7 +4,7 @@
 .french-header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: $space-4xl $space-3xl $space-2xl;
+  padding: $space-4xl $space-3xl 0;
 }
 
 .french-intro .kicker {
@@ -12,19 +12,19 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: $space-lg;
+  margin-bottom: $space-md;
 }
 
 .french-intro h1 {
-  font-size: 52px;
-  letter-spacing: -0.03em;
-  margin: 0 0 $space-lg;
+  font-size: 56px;
+  letter-spacing: -0.035em;
+  margin: 0 0 $space-md;
 }
 
 .french-intro p {
   max-width: 560px;
   color: var(--color-text-muted);
-  margin-bottom: $space-xl;
+  margin-bottom: 26px;
 }
 
 .french-filters {
@@ -34,13 +34,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-bottom: $space-2xl;
+  margin-bottom: 8px;
 }
 
 .french-hint {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px 22px;
+  padding: 0 $space-3xl 22px;
   font-size: 15px;
   color: var(--color-text-light);
   display: flex;
@@ -76,7 +76,7 @@
 .cards-grid {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 $space-3xl $space-4xl;
+  padding: 0 $space-3xl 90px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: $space-lg;

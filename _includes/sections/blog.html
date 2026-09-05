@@ -1,3 +1,9 @@
+{%- assign posts_chrono = site.blog | sort: "date" -%}
+{%- assign total_posts = posts_chrono | size -%}
+{%- assign posts_newest = posts_chrono | reverse -%}
+{%- assign month_groups = posts_newest | group_by_exp: "p", "p.date | date: '%Y-%m'" | sort: "name" | reverse -%}
+{%- assign n = total_posts | plus: 1 -%}
+
 <div class="blog-header">
   <div class="blog-intro">
     <div class="kicker" data-i18n-en="{{ site.data.i18n.en.blog.kicker }}" data-i18n-fr="{{ site.data.i18n.fr.blog.kicker }}">{{ site.data.i18n.en.blog.kicker }}</div>
@@ -6,27 +12,58 @@
   </div>
 </div>
 
+{% if total_posts > 0 %}
+<div class="blog-toolbar">
+  <button type="button" id="blog-sort-toggle" class="sort-toggle"
+          data-order="desc"
+          data-newest-en="{{ site.data.i18n.en.blog.sort_newest }}"
+          data-newest-fr="{{ site.data.i18n.fr.blog.sort_newest }}"
+          data-oldest-en="{{ site.data.i18n.en.blog.sort_oldest }}"
+          data-oldest-fr="{{ site.data.i18n.fr.blog.sort_oldest }}">
+    <span class="sort-arrow" aria-hidden="true">↓</span>
+    <span class="sort-label">{{ site.data.i18n.en.blog.sort_newest }}</span>
+  </button>
+</div>
+{% endif %}
+
 <div class="posts-list" id="posts-list">
-  {% for post in site.blog %}
-  <a class="post-preview rowlink" data-reveal href="{{ post.url | relative_url }}" data-post-id="{{ post.url | relative_url }}">
-    <span class="post-body">
-      <span class="post-meta">
-        <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
-        <span class="meta-divider">·</span>
-        {%- assign words = post.content | number_of_words -%}
-        {%- assign mins = words | divided_by: 200.0 | ceil -%}
-        <span class="post-read">{{ post.minutes | default: mins }} min</span>
+  {% for group in month_groups %}
+  {%- assign first_post = group.items | first -%}
+  {%- assign m_index = first_post.date | date: "%-m" | minus: 1 -%}
+  {%- assign month_fr = site.data.i18n.fr.blog.months[m_index] -%}
+  <section class="post-month" data-month="{{ group.name }}">
+    <div class="month-rule" role="separator">
+      <span class="month-rule-line" aria-hidden="true"></span>
+      <span class="month-label"
+            data-i18n-en="{{ first_post.date | date: '%B %Y' }}"
+            data-i18n-fr="{{ month_fr }} {{ first_post.date | date: '%Y' }}">{{ first_post.date | date: "%B %Y" }}</span>
+      <span class="month-rule-line" aria-hidden="true"></span>
+    </div>
+
+    {% for post in group.items %}
+    {%- assign n = n | minus: 1 -%}
+    <a class="post-preview rowlink" data-reveal href="{{ post.url | relative_url }}"
+       data-post-id="{{ post.url | relative_url }}"
+       data-date="{{ post.date | date: '%Y-%m-%d' }}">
+      <span class="post-body">
+        <span class="post-meta">
+          <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
+          <span class="meta-divider">·</span>
+          {%- assign words = post.content | number_of_words -%}
+          {%- assign mins = words | divided_by: 200.0 | ceil -%}
+          <span class="post-read">{{ post.minutes | default: mins }} min</span>
+        </span>
+        <span class="post-title" data-i18n-en="{{ post.title | escape }}" data-i18n-fr="{{ post.title_fr | default: post.title | escape }}">{{ post.title }}</span>
+        <span class="post-summary">{{ post.summary }}</span>{%- comment -%} content, never translated {%- endcomment -%}
       </span>
-      <span class="post-title" data-i18n-en="{{ post.title | escape }}" data-i18n-fr="{{ post.title_fr | default: post.title | escape }}">{{ post.title }}</span>
-      <span class="post-summary">{{ post.summary }}</span>{%- comment -%} content, never translated {%- endcomment -%}
-    </span>
-    <span class="post-number d-only" aria-hidden="true">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
-  </a>
+      <span class="post-number d-only" aria-hidden="true">{{ n | prepend: "0" | slice: -2, 2 }}</span>
+    </a>
+    {% endfor %}
+  </section>
   {% endfor %}
 </div>
 
-
-{% if site.blog.size == 0 %}
+{% if total_posts == 0 %}
 <div class="empty-state"
      data-i18n-en="{{ site.data.i18n.en.blog.empty }}"
      data-i18n-fr="{{ site.data.i18n.fr.blog.empty }}">{{ site.data.i18n.en.blog.empty }}</div>

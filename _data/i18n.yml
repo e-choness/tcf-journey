@@ -56,6 +56,8 @@ en:
     next: "Next post"
     prev: "Previous post"
     empty: "No posts yet. Check back soon!"
+    sort_newest: "Newest first"
+    sort_oldest: "Oldest first"
 
   drill:
     prompt: "The prompt"
@@ -131,6 +133,9 @@ fr:
     next: "Article suivant"
     prev: "Article précédent"
     empty: "Aucun article pour l'instant. Revenez bientôt !"
+    sort_newest: "Du plus récent"
+    sort_oldest: "Du plus ancien"
+    months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 
   drill:
     prompt: "La consigne"

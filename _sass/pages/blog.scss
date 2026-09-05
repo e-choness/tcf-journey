@@ -2,9 +2,9 @@
 
 // Blog page
 .blog-header {
-  max-width: 860px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: $space-4xl $space-3xl $space-2xl;
+  padding: $space-4xl $space-3xl 0;
 }
 
 .blog-intro .kicker {
@@ -12,25 +12,25 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: $space-lg;
+  margin-bottom: $space-md;
 }
 
 .blog-intro h1 {
   font-size: 52px;
   letter-spacing: -0.03em;
-  margin: 0 0 $space-lg;
+  margin: 0 0 $space-md;
 }
 
 .blog-intro p {
   max-width: 520px;
   color: var(--color-text-muted);
-  margin-bottom: $space-2xl;
+  margin-bottom: 32px;
 }
 
 .posts-list {
-  max-width: 860px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 $space-3xl $space-4xl;
+  padding: 0 $space-3xl 90px;
   display: flex;
   flex-direction: column;
 }
@@ -38,9 +38,9 @@
 .post-preview {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: $space-xl;
+  gap: $space-lg;
   align-items: center;
-  padding: 22px 6px;
+  padding: 16px 6px;
   border-bottom: 1px solid var(--color-divider);
   text-decoration: none;
   color: inherit;
@@ -67,24 +67,24 @@
 .post-title {
   display: block;
   font-family: $font-heading;
-  font-size: 28px;
-  letter-spacing: -0.025em;
-  line-height: 1.18;
-  margin: $space-sm 0 6px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 5px 0 4px;
 }
 
 .post-summary {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   color: color-mix(in srgb, var(--color-text) 66%, transparent);
-  max-width: 580px;
+  max-width: 760px;
   text-wrap: pretty;
   margin: 0;
 }
 
 .post-number {
   font-family: $font-heading;
-  font-size: 44px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -96,4 +96,83 @@
   padding: $space-3xl $space-sm;
   text-align: center;
   color: var(--color-text-dimmer);
+}
+
+.blog-toolbar {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 $space-3xl $space-lg;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sort-toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 $space-md;
+  background: transparent;
+  border: 1px solid var(--color-divider);
+  border-radius: $radius-md;
+  font-family: $font-heading;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: var(--color-hover-bg);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-text) 14%, transparent);
+  }
+}
+
+.sort-arrow {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.post-month {
+  display: block;
+
+  & + .post-month {
+    margin-top: 34px;
+  }
+}
+
+.month-rule {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: 0 6px;
+  margin-bottom: 6px;
+}
+
+.month-rule-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px),
+    transparent
+  );
+}
+
+.month-label {
+  flex: none;
+  font-family: $font-heading;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
 }

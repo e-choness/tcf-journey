@@ -6,9 +6,9 @@
 }
 
 .drill-container {
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: $space-4xl $space-3xl;
+  padding: 44px $space-3xl 90px;
 }
 
 .back-link {
@@ -17,7 +17,7 @@
   color: var(--color-accent);
   text-decoration: none;
   font-size: 14px;
-  margin-bottom: $space-3xl;
+  margin-bottom: 18px;
   transition: transform 0.2s;
 
   &:hover {
@@ -30,7 +30,7 @@
 }
 
 .drill-header {
-  margin-bottom: $space-4xl;
+  margin-bottom: 26px;
 }
 
 .drill-tags-row {
@@ -47,10 +47,10 @@
 }
 
 .drill-title {
-  font-size: 46px;
+  font-size: 44px;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  margin: 0 0 $space-lg;
+  margin: 0 0 14px;
 }
 
 .drill-meta {
@@ -62,10 +62,10 @@
 
 .drill-brief {
   position: relative;
-  margin-bottom: $space-4xl;
-  padding: $space-2xl;
+  margin-bottom: 30px;
+  padding: 24px;
   border-radius: $radius-md;
-  background: rgba(111, 98, 184, 0.08);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
   border: 1px solid var(--color-divider);
 
   .tape {
@@ -93,10 +93,10 @@
 }
 
 .drill-content {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.75;
   color: var(--color-text-content);
-  margin-bottom: $space-4xl;
+  margin-bottom: 34px;
 
   h2 {
     font-size: 28px;
@@ -109,7 +109,7 @@
   }
 
   p {
-    margin-bottom: $space-lg;
+    margin-bottom: 18px;
   }
 
   ul, ol {
